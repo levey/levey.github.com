@@ -2,7 +2,7 @@
 layout: post
 title: "从 Linode 导出 PostgreSQL 数据到 Heroku"
 description: ""
-category: 
+category: blog
 tags: []
 ---
 {% include JB/setup %}
@@ -25,7 +25,8 @@ tags: []
 
 首先 SSH 连接到 Linode 服务器, 输入命令 
 
-	PGPASSWORD=[您的PG密码] pg_dump -Fc --no-acl --no-owner -h 127.0.0.1 -U [您的PG用户名] [需要导出的数据库] > mydb.dump
+	PGPASSWORD=[您的PG密码] pg_dump -Fc --no-acl --no-owner -h 127.0.0.1 -U [您的PG用户名] 
+	[需要导出的数据库名] > mydb.dump
 
 导出的 mydb.dump 就是	之后需要用到的备份文件。
 

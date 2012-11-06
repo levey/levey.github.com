@@ -4,7 +4,7 @@
  <title>Levey</title>
  <link href="http://levey.github.com/atom.xml" rel="self"/>
  <link href="http://levey.github.com/"/>
- <updated>2012-11-06T00:26:26+08:00</updated>
+ <updated>2012-11-06T09:53:42+08:00</updated>
  <id>http://levey.github.com/</id>
  <author>
    <name>Levey</name>
@@ -14,9 +14,9 @@
  
  <entry>
    <title>从 Linode 导出 PostgreSQL 数据到 Heroku</title>
-   <link href="http://levey.github.com/2012/11/01/linode-postgresql-heroku.html"/>
-   <updated>2012-11-01T00:00:00+08:00</updated>
-   <id>http://levey.github.com/2012/11/01/linode-postgresql-heroku</id>
+   <link href="http://levey.github.com/blog/2012/11/06/migrate-postgresql-data-from-linode-to-heroku.html"/>
+   <updated>2012-11-06T00:00:00+08:00</updated>
+   <id>http://levey.github.com/blog/2012/11/06/migrate-postgresql-data-from-linode-to-heroku</id>
    <content type="html">&lt;h4 id='id1'&gt;前言&lt;/h4&gt;
 
 &lt;p&gt;这篇博客意在帮助有想从 Linode 迁移网站到 Heroku 的读者.&lt;/p&gt;
@@ -37,7 +37,8 @@
 
 &lt;p&gt;首先 SSH 连接到 Linode 服务器, 输入命令&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;PGPASSWORD=[您的PG密码] pg_dump -Fc --no-acl --no-owner -h 127.0.0.1 -U [您的PG用户名] [需要导出的数据库] &amp;gt; mydb.dump&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;PGPASSWORD=[您的PG密码] pg_dump -Fc --no-acl --no-owner -h 127.0.0.1 -U [您的PG用户名] 
+[需要导出的数据库名] &amp;gt; mydb.dump&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;导出的 mydb.dump 就是 之后需要用到的备份文件。&lt;/p&gt;
 

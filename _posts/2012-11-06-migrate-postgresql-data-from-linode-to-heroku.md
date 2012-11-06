@@ -7,7 +7,6 @@ tags: []
 ---
 {% include JB/setup %}
 
-####前言
 
 这篇博客意在帮助有想从 Linode 迁移网站到 Heroku 的读者.
 
@@ -67,7 +66,7 @@ tags: []
 
  这个很简单，按照 Heroku 的教程就好了，在你的项目目录里
  
-  	heroku pgbackups:restore DATABASE [第二步公开的数据库备份文件地址]
+  	heroku pgbackups:restore [数据库名] [第二步公开的数据库备份文件地址]
 
 
 	

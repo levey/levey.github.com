@@ -4,7 +4,7 @@
  <title>Levey</title>
  <link href="http://levey.github.com/atom.xml" rel="self"/>
  <link href="http://levey.github.com/"/>
- <updated>2012-11-06T09:53:42+08:00</updated>
+ <updated>2012-11-06T16:02:23+08:00</updated>
  <id>http://levey.github.com/</id>
  <author>
    <name>Levey</name>
@@ -17,9 +17,7 @@
    <link href="http://levey.github.com/blog/2012/11/06/migrate-postgresql-data-from-linode-to-heroku.html"/>
    <updated>2012-11-06T00:00:00+08:00</updated>
    <id>http://levey.github.com/blog/2012/11/06/migrate-postgresql-data-from-linode-to-heroku</id>
-   <content type="html">&lt;h4 id='id1'&gt;前言&lt;/h4&gt;
-
-&lt;p&gt;这篇博客意在帮助有想从 Linode 迁移网站到 Heroku 的读者.&lt;/p&gt;
+   <content type="html">&lt;p&gt;这篇博客意在帮助有想从 Linode 迁移网站到 Heroku 的读者.&lt;/p&gt;
 
 &lt;p&gt;一星期前，我的网站 &lt;a href='http://coderxcoder.com'&gt;coderxcoder&lt;/a&gt; 想从 Linode 迁移到 Heroku, 本来像尝试 使 用 ruby 的 taps 这个 gem 来迁移，但是无奈失败多次，最后使用此篇博客中的方法。&lt;/p&gt;
 
@@ -78,7 +76,7 @@
 
 &lt;p&gt;这个很简单，按照 Heroku 的教程就好了，在你的项目目录里&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;heroku pgbackups:restore DATABASE [第二步公开的数据库备份文件地址]&lt;/code&gt;&lt;/pre&gt;</content>
+&lt;pre&gt;&lt;code&gt;heroku pgbackups:restore [数据库名] [第二步公开的数据库备份文件地址]&lt;/code&gt;&lt;/pre&gt;</content>
  </entry>
  
  

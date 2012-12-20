@@ -99,7 +99,9 @@ Node.js: `Sublime Text 2` / ` iTerm 2`
 	var note = require('./controllers/note')
 
 	exports.route = function (app) {
-	  app.get('/notes', note.index);
+	  app.get('/', function(req, res) {
+  	    res.send('hello world');
+	  });
 	};
 
 最后在 **app.js** 中 把那些 express 的默认建立的 user 变量删除，然后用以下代码替换原来的路由代码。
@@ -109,11 +111,148 @@ Node.js: `Sublime Text 2` / ` iTerm 2`
 
 然后重新启动 Server (node app.js)，我们就可以看到主页只输出 hello world 字符串。
 
+##### 创建Model
+
+mongoose 这个库管理 MongoDB 听方便的，在 **/models/note.js** 里写下如下代码
+
+	var mongoose = require('mongoose');
+    var db = mongoose.createConnection('mongodb://localhost/notes')
+    var NoteSchema = mongoose.Schema({
+	  title: String,
+	  content: String,
+	  author: String
+    });
+
+    exports.Note = db.model('Note',NoteSchema);
+
+然后我们在 **/controllers/note.js** 里用一句
+
+	var Note = require('../models/note').Note;
+
+来引入 Note 这个 model，之后在这个 controller 里就能新建 Note 对象了。
 
 
 
+##### 创建路由
 
-**- - 未完待续**
+在 **routes.js** 里追加如下 API
+
+	var note = require('./controllers/note')
+
+	exports.route = function (app) {
+	  app.get('/', function(req, res) {
+  	    res.send('hello world');
+	  });
+	  app.get('/notes', note.index);
+	  app.get('/note/:id', note.show);
+	  app.post('/notes', note.create);
+	  app.delete('/note/:id', note.destroy);
+	};
+
+第一个就是获取 note 列表。
+
+第二个是得到一个 note 的详细信息（不过咱这个 demo 直接一个列表就有了详细信息）。
+
+第三个是新建一个 note.
+
+第四个是删除一个对应 id 的 note.
+
+
+##### 最后一步，完善 Controller
+
+在之前一步我们看到了 每个 API 都调用了 controller 里的相应方法, 打开 **./controllers/note** 输入如下代码
+
+var Note = require('../models/note').Note;
+
+	exports.index = function(req, res) {
+	  Note.find(function(err, notes) {
+		if (!err) {
+			res.send(notes);
+		} else {
+			res.send(err);
+		}
+	  });
+    }
+
+	exports.show = function(req, res) {
+	  Note.findById(req.params.id, function (err, note) {
+        if (!err) {
+          res.send({success: 1, note: note});
+        } else {
+    	  res.send({success: 0});
+        }
+      });
+    }
+
+    exports.create = function(req, res) {
+	  var note = new Note();
+	  note.title = req.body.title;
+	  note.content = req.body.content;
+	  note.author = req.body.author;
+	  console.log(note);
+	  note.save(function(err){
+		if (!err) {
+			res.send({success: 1});
+		} else {
+			res.send({success: 0});
+		}
+	  });
+    }
+
+	exports.destroy = function(req, res) {
+	  if (req.params.id) {
+		res.send({success: 0, error: "Need <id> parameter."});
+	  } else {
+		Note.findById(req.params.id, function (err, note) {
+	      if (!err) {
+	        note.remove(function(err) {
+	      	  if (!err) {
+	      	  	res.send({success: 1});
+	      	  } else {
+	      		res.send({success: 0, error: "Failed to delete."});
+	      	  }
+	        });
+	      } else {
+	    	res.send({success: 0, error: "Can't find the note."});
+	      }
+	    });
+	  }
+    }
+
+
+##### 测试
+
+由于我们使用了 MongoDB 作为数据库，我们需要先安装，使用 Homebrew 安装很方便，终端执行
+
+	brew update
+	brew install mongodb
+	
+
+安装好后，在终端执行 **mongod** 就可以开启数据库服务了。
+
+然后，我们先在终端执行 **node app.js** 开启应用服务器。
+
+最后，可以写个脚本试一下创建一个 note, Ruby 代码如下
+
+
+	require 'net/http'
+	response = Net::HTTP.post_form(URI.parse('http://localhost:3000/notes'), 
+                               {title: 'hello world',
+                               	content: 'hello big world',
+                               	author: 'levey'})
+ 
+	puts response.body
+
+如果输出 { "success": 1 } ， 说明创建成功。
+
+##### 歇会儿 & 接下来
+
+至此，WhateverNote 的 Server 端的这几个 API 完成了，接下来的第二篇将是 iOS 客户端与刚写好的 Server 端的交互的教程。
+
+
+**Have a nice day.**
+
+
 
 	
 

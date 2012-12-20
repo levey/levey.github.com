@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "iOS / node.js 贯穿 iOS app 前后端教程(一)"
+title: "Objective-C / Node.js 贯穿 iOS app 前后端教程(一)"
 description: ""
-category: 
+category: blog
 tags: []
 ---
 {% include JB/setup %}
@@ -13,7 +13,7 @@ tags: []
 
 #### 语言 / 框架
 
-iOS 端用到的语言就是 Objective-C, 为了方便我选择 AFNetowrking 作为 HTTP 库 。服务器端本来想用 Ruby on Rails  或者 Sinatra 的，但是后来想试一试 Node.js 的体验，所以就用 Node.js了，选择的 web framework 是 express.js, 跟 Sinatra 是类似的，都比较轻量级。
+iOS 端用到的语言就是 Objective-C, 为了方便我选择 [AFNetowrking](https://github.com/AFNetworking/AFNetworking) 作为 HTTP 库 。服务器端本来想用 Ruby on Rails  或者 Sinatra 的，但是后来想试一试 Node.js 的体验，所以就用 Node.js了，选择的 web framework 是 express.js, 跟 Sinatra 是类似的，都比较轻量级。
 
 #### 工具
 
@@ -109,7 +109,11 @@ Node.js: `Sublime Text 2` / ` iTerm 2`
 
 然后重新启动 Server (node app.js)，我们就可以看到主页只输出 hello world 字符串。
 
-**-- 未完待续**
+
+
+
+
+**- - 未完待续**
 
 	
 

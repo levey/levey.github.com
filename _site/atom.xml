@@ -4,7 +4,7 @@
  <title>Levey</title>
  <link href="http://levey.github.com/atom.xml" rel="self"/>
  <link href="http://levey.github.com/"/>
- <updated>2012-12-13T17:54:14+08:00</updated>
+ <updated>2012-12-20T12:38:11+08:00</updated>
  <id>http://levey.github.com/</id>
  <author>
    <name>Levey</name>
@@ -13,19 +13,99 @@
 
  
  <entry>
-   <title>iOS / node.js 贯穿 iOS app 前后端教程(一)</title>
-   <link href="http://levey.github.com/2012/12/13/build-ios-app-with-nodejs-server-1.html"/>
+   <title>Delegate vs Blcok vs Notification vs KVO</title>
+   <link href="http://levey.github.com/blog/2012/12/20/delegate-vs-blcok-vs-notification-vs-kvo.html"/>
+   <updated>2012-12-20T00:00:00+08:00</updated>
+   <id>http://levey.github.com/blog/2012/12/20/delegate-vs-blcok-vs-notification-vs-kvo</id>
+   <content type="html">&lt;p&gt;最近在工作中遇到对使用 Delegate 和 Notification 的争议，我写下了自己的观点。&lt;/p&gt;
+
+&lt;h4 id='delegate'&gt;Delegate&lt;/h4&gt;
+
+&lt;h5 id='id14'&gt;好处&lt;/h5&gt;
+
+&lt;p&gt;语法严格，所有方法必须被定义。&lt;/p&gt;
+
+&lt;p&gt;编译期的检查，Warning 或者 Error。&lt;/p&gt;
+
+&lt;p&gt;非常容易追踪，DEBUG 或者跳转到定义的时候很方便。&lt;/p&gt;
+
+&lt;h5 id='id15'&gt;坏处&lt;/h5&gt;
+
+&lt;p&gt;写的代码比较多。&lt;/p&gt;
+
+&lt;p&gt;需要检查 delegate 是否为空指针。&lt;/p&gt;
+
+&lt;p&gt;一对多实现困难。&lt;/p&gt;
+
+&lt;h4 id='block'&gt;Block&lt;/h4&gt;
+
+&lt;h5 id='id16'&gt;好处&lt;/h5&gt;
+
+&lt;p&gt;匿名方法，不需要额外定义方法。&lt;/p&gt;
+
+&lt;p&gt;异步处理时的语法直观。&lt;/p&gt;
+
+&lt;h5 id='id17'&gt;坏处&lt;/h5&gt;
+
+&lt;p&gt;需要小心 retain cycle.&lt;/p&gt;
+
+&lt;p&gt;传入 block 的对象需要做处理。&lt;/p&gt;
+
+&lt;h4 id='notification'&gt;Notification&lt;/h4&gt;
+
+&lt;h5 id='id18'&gt;好处&lt;/h5&gt;
+
+&lt;p&gt;实现简单。&lt;/p&gt;
+
+&lt;p&gt;更新多个对象。&lt;/p&gt;
+
+&lt;h5 id='id19'&gt;坏处&lt;/h5&gt;
+
+&lt;p&gt;没有编译时检查。&lt;/p&gt;
+
+&lt;p&gt;在不需要的时候需要注销通知。&lt;/p&gt;
+
+&lt;p&gt;不可追踪（DEBUG）。&lt;/p&gt;
+
+&lt;p&gt;通知的名字需要在 controller 和 observer 都被知道,如果稍有写错,后果不堪。&lt;/p&gt;
+
+&lt;h4 id='kvo'&gt;KVO&lt;/h4&gt;
+
+&lt;h5 id='id20'&gt;好处&lt;/h5&gt;
+
+&lt;p&gt;在2个对象间同步信息很方便。&lt;/p&gt;
+
+&lt;p&gt;能提供一个对象的新的值和旧的值。&lt;/p&gt;
+
+&lt;p&gt;可以 observe 嵌套的对象。&lt;/p&gt;
+
+&lt;h5 id='id21'&gt;坏处&lt;/h5&gt;
+
+&lt;p&gt;被监听的属性是需要用字符串来表示的，没有编译期间检查。&lt;/p&gt;
+
+&lt;p&gt;属性的改动导致 observe 失效。&lt;/p&gt;
+
+&lt;p&gt;在对象销毁的时候需要移除 observer。&lt;/p&gt;
+
+&lt;h4 id='id22'&gt;总结&lt;/h4&gt;
+
+&lt;p&gt;我个人比较倾向于使用 Delegate 和 Block 来在各对象之前交互（在有多个方法的时候我会使用Delegate）在少数需要更新多个对象的使用 Notification 和 KVO.&lt;/p&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Objective-C / Node.js 贯穿 iOS app 前后端教程(一)</title>
+   <link href="http://levey.github.com/blog/2012/12/13/build-ios-app-with-nodejs-server-1.html"/>
    <updated>2012-12-13T00:00:00+08:00</updated>
-   <id>http://levey.github.com/2012/12/13/build-ios-app-with-nodejs-server-1</id>
-   <content type="html">&lt;h4 id='id1'&gt;说明&lt;/h4&gt;
+   <id>http://levey.github.com/blog/2012/12/13/build-ios-app-with-nodejs-server-1</id>
+   <content type="html">&lt;h4 id='id12'&gt;说明&lt;/h4&gt;
 
 &lt;p&gt;这是一篇很基础的教程，全篇通过制作一个叫 WhateverNote 的 app，来描述 iOS app 的前端和服务端交互的。&lt;/p&gt;
 
 &lt;h4 id='__'&gt;语言 / 框架&lt;/h4&gt;
 
-&lt;p&gt;iOS 端用到的语言就是 Objective-C, 为了方便我选择 AFNetowrking 作为 HTTP 库 。服务器端本来想用 Ruby on Rails 或者 Sinatra 的，但是后来想试一试 Node.js 的体验，所以就用 Node.js了，选择的 web framework 是 express.js, 跟 Sinatra 是类似的，都比较轻量级。&lt;/p&gt;
+&lt;p&gt;iOS 端用到的语言就是 Objective-C, 为了方便我选择 &lt;a href='https://github.com/AFNetworking/AFNetworking'&gt;AFNetowrking&lt;/a&gt; 作为 HTTP 库 。服务器端本来想用 Ruby on Rails 或者 Sinatra 的，但是后来想试一试 Node.js 的体验，所以就用 Node.js了，选择的 web framework 是 express.js, 跟 Sinatra 是类似的，都比较轻量级。&lt;/p&gt;
 
-&lt;h4 id='id2'&gt;工具&lt;/h4&gt;
+&lt;h4 id='id13'&gt;工具&lt;/h4&gt;
 
 &lt;p&gt;iOS: &lt;code&gt;Xcode&lt;/code&gt;&lt;/p&gt;
 
@@ -116,7 +196,7 @@ exports.route = function (app) {
 
 &lt;p&gt;然后重新启动 Server (node app.js)，我们就可以看到主页只输出 hello world 字符串。&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;&amp;#8211; 未完待续&lt;/strong&gt;&lt;/p&gt;</content>
+&lt;p&gt;&lt;strong&gt;- - 未完待续&lt;/strong&gt;&lt;/p&gt;</content>
  </entry>
  
  <entry>

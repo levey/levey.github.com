@@ -3,13 +3,15 @@ layout: post
 title: "Objective-C / Node.js 贯穿 iOS app 前后端教程(一)"
 description: ""
 category: blog
-tags: []
+tags: ["iOS", "Node.js"]
 ---
 {% include JB/setup %}
 
 ####  说明
 
 这是一篇很基础的教程，全篇通过制作一个叫 WhateverNote 的 app，来描述 iOS app 的前端和服务端交互的。
+
+这份教程只是用于初学示例，有很多不严谨的地方（比如有些类型检查遗漏了），请多多包含 :)
 
 #### 语言 / 框架
 
@@ -27,7 +29,7 @@ Node.js: `Sublime Text 2` / ` iTerm 2`
 
 先从 [http://nodejs.org](http://nodejs.org) 下载安装 Node.js，我当前的最新稳定版本为 v0.8.15。
 
-安装 Node.js 成功后，通过终端安装 experess.js, -g 参数表示安装的包为全局的。
+安装 Node.js 成功后，通过终端安装 express.js, -g 参数表示安装的包为全局的。
 
 	npm install -g express
 	
@@ -144,9 +146,10 @@ mongoose 这个库管理 MongoDB 听方便的，在 **/models/note.js** 里写�
   	    res.send('hello world');
 	  });
 	  app.get('/notes', note.index);
-	  app.get('/note/:id', note.show);
+	  app.get('/notes/:id', note.show);
 	  app.post('/notes', note.create);
-	  app.delete('/note/:id', note.destroy);
+	  app.put('/notes/:id',note.update);
+	  app.delete('/notes/:id', note.destroy);
 	};
 
 第一个就是获取 note 列表。
@@ -198,26 +201,45 @@ var Note = require('../models/note').Note;
 		}
 	  });
     }
+    
+    exports.update = function(req, res) {
+	  var update = {
+		title: req.param('title'), 
+		content: req.param('content'), 
+		author: req.param('author')
+	  };
+	  Note.findByIdAndUpdate(req.params.id, update, function(err) {
+	    if (err) {
+	      res.send(err);
+	    } else {
+	      res.send({success: 1});
+	    }
+	  });
+    }
 
 	exports.destroy = function(req, res) {
-	  if (req.params.id) {
+	  if (!req.params.id) {
 		res.send({success: 0, error: "Need <id> parameter."});
 	  } else {
 		Note.findById(req.params.id, function (err, note) {
 	      if (!err) {
-	        note.remove(function(err) {
-	      	  if (!err) {
-	      	  	res.send({success: 1});
-	      	  } else {
-	      		res.send({success: 0, error: "Failed to delete."});
-	      	  }
-	        });
+	    	if (note) {
+	    	  note.remove(function(err) {
+	      		if (!err) {
+	      			res.send({success: 1});
+	      		} else {
+	      			res.send({success: 0, error: "Failed to delete."});
+	      		}
+	      	  });
+	    	} else {
+	    		res.send({success: 0, error: "Can not find note."});
+	    	}
 	      } else {
-	    	res.send({success: 0, error: "Can't find the note."});
+	    	res.send({success: 0, error: "Failed to delete."});
 	      }
 	    });
 	  }
-    }
+	}
 
 
 ##### 测试

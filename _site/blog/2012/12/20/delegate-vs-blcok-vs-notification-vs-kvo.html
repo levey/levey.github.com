@@ -51,7 +51,7 @@
 
 <h4 id='delegate'>Delegate</h4>
 
-<h5 id='id18'>好处</h5>
+<h5 id='id5'>好处</h5>
 
 <p>语法严格，所有方法必须被定义。</p>
 
@@ -59,7 +59,7 @@
 
 <p>非常容易追踪，DEBUG 或者跳转到定义的时候很方便。</p>
 
-<h5 id='id19'>坏处</h5>
+<h5 id='id6'>坏处</h5>
 
 <p>写的代码比较多。</p>
 
@@ -69,13 +69,13 @@
 
 <h4 id='block'>Block</h4>
 
-<h5 id='id20'>好处</h5>
+<h5 id='id7'>好处</h5>
 
 <p>匿名方法，不需要额外定义方法。</p>
 
 <p>异步处理时的语法直观。</p>
 
-<h5 id='id21'>坏处</h5>
+<h5 id='id8'>坏处</h5>
 
 <p>需要小心 retain cycle.</p>
 
@@ -83,13 +83,13 @@
 
 <h4 id='notification'>Notification</h4>
 
-<h5 id='id22'>好处</h5>
+<h5 id='id9'>好处</h5>
 
 <p>实现简单。</p>
 
 <p>更新多个对象。</p>
 
-<h5 id='id23'>坏处</h5>
+<h5 id='id10'>坏处</h5>
 
 <p>没有编译时检查。</p>
 
@@ -101,7 +101,7 @@
 
 <h4 id='kvo'>KVO</h4>
 
-<h5 id='id24'>好处</h5>
+<h5 id='id11'>好处</h5>
 
 <p>在2个对象间同步信息很方便。</p>
 
@@ -109,7 +109,7 @@
 
 <p>可以 observe 嵌套的对象。</p>
 
-<h5 id='id25'>坏处</h5>
+<h5 id='id12'>坏处</h5>
 
 <p>被监听的属性是需要用字符串来表示的，没有编译期间检查。</p>
 
@@ -117,7 +117,7 @@
 
 <p>在对象销毁的时候需要移除 observer。</p>
 
-<h4 id='id26'>总结</h4>
+<h4 id='id13'>总结</h4>
 
 <p>我个人比较倾向于使用 Delegate 和 Block 来在各对象之前交互（在有多个方法的时候我会使用Delegate）在少数需要更新多个对象的使用 Notification 和 KVO.</p>
 
@@ -127,6 +127,8 @@
 <div id="related">
   <h3>Related Posts</h3>
   <ul class="posts">
+    
+    <li><span>2012-12-21 &raquo;</span> <a href="/blog/2012/12/21/build-ios-app-with-nodejs-server-2.html">Objective-C / Node.js 贯穿 iOS app 前后端教程(二)</a></li>
     
     <li><span>2012-12-13 &raquo;</span> <a href="/blog/2012/12/13/build-ios-app-with-nodejs-server-1.html">Objective-C / Node.js 贯穿 iOS app 前后端教程(一)</a></li>
     

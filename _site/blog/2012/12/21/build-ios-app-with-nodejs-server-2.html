@@ -43,83 +43,46 @@
       <p class="meta">
 <a href="/"><i class="home icon-home"></i></a>
 </p>
-<h2 class="title">从 Linode 导出 PostgreSQL 数据到 Heroku</h2>
+<h2 class="title">Objective-C / Node.js 贯穿 iOS app 前后端教程(二)</h2>
 
  <p class="signature"></p>
 <div id="post">
-<p>这篇博客意在帮助有想从 Linode 迁移网站到 Heroku 的读者.</p>
+<h4 id='id14'>说明</h4>
 
-<p>一星期前，我的网站 <a href='http://coderxcoder.com'>coderxcoder</a> 想从 Linode 迁移到 Heroku, 本来像尝试 使 用 ruby 的 taps 这个 gem 来迁移，但是无奈失败多次，最后使用此篇博客中的方法。</p>
+<p>这是一篇很基础的教程，全篇通过制作一个叫 WhateverNote 的 app，来描述 iOS app 的前端和服务端交互的。</p>
 
-<p>本篇使用到的手段有:</p>
+<p>这份教程只是用于初学示例，有很多不严谨的地方（比如有些类型检查遗漏了），请多多包含 :)</p>
 
-<ol>
-<li>使用 <a href='http://www.postgresql.org/docs/7.3/static/app-pgdump.html'>pg_dump</a> 备份 PostgreSQL 数据。</li>
+<h4 id='__'>语言 / 框架</h4>
 
-<li>Nginx 公开备份好的文件。</li>
+<p>iOS 端用到的语言就是 Objective-C, 为了方便我选择 <a href='https://github.com/AFNetworking/AFNetworking'>AFNetowrking</a> 作为 HTTP 库 。服务器端本来想用 Ruby on Rails 或者 Sinatra 的，但是后来想试一试 Node.js 的体验，所以就用 Node.js了，选择的 web framework 是 express.js, 跟 Sinatra 是类似的，都比较轻量级。</p>
 
-<li>使用 <a href='https://devcenter.heroku.com/articles/pgbackups'>pgbackups</a> 这个 Heroku 的插件来导入并更新数据库。</li>
-</ol>
+<h4 id='id15'>工具</h4>
 
-<h5 id='1'>1.备份数据库</h5>
+<p>iOS: <code>Xcode</code></p>
 
-<p>首先 SSH 连接到 Linode 服务器, 输入命令</p>
+<p>Node.js: <code>Sublime Text 2</code> / <code> iTerm 2</code></p>
+<hr />
+<h4 id='whatevernote__ios'>WhateverNote - iOS</h4>
 
-<pre><code>PGPASSWORD=[您的PG密码] pg_dump -Fc --no-acl --no-owner -h 127.0.0.1 -U [您的PG用户名] 
-[需要导出的数据库名] &gt; mydb.dump</code></pre>
+<p>首先，使用 Xcode 新建一个名为 WhateverNote 的空项目。</p>
 
-<p>导出的 mydb.dump 就是 之后需要用到的备份文件。</p>
+<p>代码已上传，博主最近抑郁，见谅。</p>
 
-<h5 id='2_nginx_'>2. Nginx 公开数据库备份文件</h5>
+<p>&#8211;未完待续</p>
 
-<p>首先， 在 /var/www 里新建一个 dbbackup 的目录下</p>
-
-<pre><code>sudo mkdir /var/www/dbbackup</code></pre>
-
-<p>然后， 在 /etc/nginx/sites-available 目录下 新建一个 dbbackup.conf 的文件</p>
-
-<pre><code>sudo touch /etc/nginx/sites-available/dbbackup.conf</code></pre>
-
-<p>再然后， 在 dbbackup.conf 里输入以下配置</p>
-
-<pre><code>server
-{
-	server_name [你的服务器的域名或者IP];
-	listen 7000;
-	access_log off;
-	root /var/www/dbbackup;
-
-	location  /  {
-    	autoindex  on;
-	}
-}</code></pre>
-
-<p>再然后，链接到 sites-enabled 目录</p>
-
-<pre><code>ln -s /etc/nginx/sites-available/dbbackup.conf /etc/nginx/sites-enabled/dbbackup.conf</code></pre>
-
-<p>再然后，重启 nginx</p>
-
-<pre><code>sudo /etc/init.d/ngnix restart</code></pre>
-
-<h5 id='3_'>3. 恢复数据库</h5>
-
-<p>这个很简单，按照 Heroku 的教程就好了，在你的项目目录里</p>
-
-<pre><code>heroku pgbackups:restore [数据库名] [第二步公开的数据库备份文件地址]</code></pre>
-
- <p class="signature">2012-11-06  written by levey </p>
+ <p class="signature">2012-12-21  written by levey </p>
 </div>
 
 <div id="related">
   <h3>Related Posts</h3>
   <ul class="posts">
     
-    <li><span>2012-12-21 &raquo;</span> <a href="/blog/2012/12/21/build-ios-app-with-nodejs-server-2.html">Objective-C / Node.js 贯穿 iOS app 前后端教程(二)</a></li>
-    
     <li><span>2012-12-20 &raquo;</span> <a href="/blog/2012/12/20/delegate-vs-blcok-vs-notification-vs-kvo.html">Delegate vs Blcok vs Notification vs KVO</a></li>
     
     <li><span>2012-12-13 &raquo;</span> <a href="/blog/2012/12/13/build-ios-app-with-nodejs-server-1.html">Objective-C / Node.js 贯穿 iOS app 前后端教程(一)</a></li>
+    
+    <li><span>2012-11-06 &raquo;</span> <a href="/blog/2012/11/06/migrate-postgresql-data-from-linode-to-heroku.html">从 Linode 导出 PostgreSQL 数据到 Heroku</a></li>
     
   </ul>
 </div>

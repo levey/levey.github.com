@@ -4,7 +4,7 @@
  <title>Levey</title>
  <link href="http://levey.github.com/atom.xml" rel="self"/>
  <link href="http://levey.github.com/"/>
- <updated>2012-12-24T14:21:49+08:00</updated>
+ <updated>2012-12-25T21:41:49+08:00</updated>
  <id>http://levey.github.com/</id>
  <author>
    <name>Levey</name>
@@ -13,21 +13,23 @@
 
  
  <entry>
-   <title>Objective-C / Node.js 贯穿 iOS app 前后端教程(二)</title>
+   <title>Objective-C / Node.js 编写 iOS app 前后端教程(二)</title>
    <link href="http://levey.github.com/blog/2012/12/21/build-ios-app-with-nodejs-server-2.html"/>
    <updated>2012-12-21T00:00:00+08:00</updated>
    <id>http://levey.github.com/blog/2012/12/21/build-ios-app-with-nodejs-server-2</id>
-   <content type="html">&lt;h4 id='id14'&gt;说明&lt;/h4&gt;
+   <content type="html">&lt;h4 id='id78'&gt;说明&lt;/h4&gt;
 
 &lt;p&gt;这是一篇很基础的教程，全篇通过制作一个叫 WhateverNote 的 app，来描述 iOS app 的前端和服务端交互的。&lt;/p&gt;
 
-&lt;p&gt;这份教程只是用于初学示例，有很多不严谨的地方（比如有些类型检查遗漏了），请多多包含 :)&lt;/p&gt;
+&lt;p&gt;这份教程只是用于初学示例，可能有很多不严谨的地方（比如有些类型检查遗漏了），请多多包含 :)&lt;/p&gt;
+
+&lt;p&gt;代码托管在 &lt;a href='https://github.com/levey/WhateverNote'&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h4 id='__'&gt;语言 / 框架&lt;/h4&gt;
 
 &lt;p&gt;iOS 端用到的语言就是 Objective-C, 为了方便我选择 &lt;a href='https://github.com/AFNetworking/AFNetworking'&gt;AFNetowrking&lt;/a&gt; 作为 HTTP 库 。服务器端本来想用 Ruby on Rails 或者 Sinatra 的，但是后来想试一试 Node.js 的体验，所以就用 Node.js了，选择的 web framework 是 express.js, 跟 Sinatra 是类似的，都比较轻量级。&lt;/p&gt;
 
-&lt;h4 id='id15'&gt;工具&lt;/h4&gt;
+&lt;h4 id='id79'&gt;工具&lt;/h4&gt;
 
 &lt;p&gt;iOS: &lt;code&gt;Xcode&lt;/code&gt;&lt;/p&gt;
 
@@ -35,11 +37,156 @@
 &lt;hr /&gt;
 &lt;h4 id='whatevernote__ios'&gt;WhateverNote - iOS&lt;/h4&gt;
 
+&lt;h6 id='id80'&gt;准备工作&lt;/h6&gt;
+
 &lt;p&gt;首先，使用 Xcode 新建一个名为 WhateverNote 的空项目。&lt;/p&gt;
 
-&lt;p&gt;代码已上传，博主最近抑郁，见谅。&lt;/p&gt;
+&lt;p&gt;预先在项目目录里预先新建 &lt;strong&gt;Controllers&lt;/strong&gt;,&lt;strong&gt;Models&lt;/strong&gt;, &lt;strong&gt;3rd-party&lt;/strong&gt; 等目录。&lt;/p&gt;
 
-&lt;p&gt;&amp;#8211;未完待续&lt;/p&gt;</content>
+&lt;p&gt;然后从网上下载 &lt;strong&gt;AFNetworking&lt;/strong&gt;, &lt;strong&gt;JSONKit&lt;/strong&gt; 这2个第三方库到 3rd-party 目录下，然后引用进项目。&lt;/p&gt;
+
+&lt;h5 id='_model'&gt;实现 Model&lt;/h5&gt;
+
+&lt;p&gt;由于 WhateverNote 比较简单，就一个 model，而且属性也只有三个，所以 我们只要在 Model 目录下新建 &lt;strong&gt;Note.h&lt;/strong&gt; 和 &lt;strong&gt;Note.m&lt;/strong&gt;.代码如下：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note.h&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;@interface Note : NSObject
+
+@property (nonatomic, strong) NSString *noteID;
+@property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong) NSString *content;
+@property (nonatomic, strong) NSString *author;
+
+- (id)initWithAttributes:(NSDictionary *)attributes;
+
+@end&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Note.m&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#import &amp;quot;Note.h&amp;quot;
+
+@implementation Note
+
+- (id)initWithAttributes:(NSDictionary *)attributes
+{
+	self = [super init];
+	if (self) {
+    	_noteID = [attributes valueForKeyPath:@&amp;quot;_id&amp;quot;];
+    	_title = [attributes valueForKeyPath:@&amp;quot;title&amp;quot;];
+    	_content = [attributes valueForKeyPath:@&amp;quot;content&amp;quot;];
+    	_author = [attributes valueForKeyPath:@&amp;quot;author&amp;quot;];
+	}
+
+	return self;
+}
+
+@end&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;接下来在 Note List 页面，我们会把从 server 端获取的 json 数据 解析成一个都是 Note 对象的列表。&lt;/p&gt;
+
+&lt;h5 id='_controller'&gt;实现 Controller&lt;/h5&gt;
+
+&lt;p&gt;在 Controller 目录下新建 &lt;strong&gt;NoteListViewController&lt;/strong&gt; 和 &lt;strong&gt;NoteViewController&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;NoteListViewController 继承自 UITableViewController, 功能是显示已存在 server 的 note 列表，能对列表的 cell 做删除，从而删除 server 上一个对应的 note. NoteViewConrller 功能是新增、查看、更新单个 Note 的信息 (通过回调给 NoteListViewController 执行)。&lt;/p&gt;
+
+&lt;p&gt;由于 API 是 RESTful 风格，我就直接使用了 AFNetworking 的 HTTPClient 类。&lt;/p&gt;
+
+&lt;p&gt;以下是网络请求的代码:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;NoteListViewController.m&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;-(void)refreshList
+{    
+	[self.httpClient getPath:@&amp;quot;notes&amp;quot; parameters:nil
+	 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    		NSArray *responseArray = [responseObject objectFromJSONData];
+    		NSLog(@&amp;quot;%@&amp;quot;, responseArray);
+    
+    		NSMutableArray *mArr = [NSMutableArray array];
+    		for (NSDictionary *attributes in responseArray) {
+        		Note *note = [[Note alloc] initWithAttributes:attributes];
+        		[mArr addObject:note];
+    		}
+    		self.dataArray = mArr;
+    		[self.tableView reloadData];
+
+		} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    			NSLog(@&amp;quot;Failed to get note list, ERROR &amp;gt;&amp;gt; %@&amp;quot;, error);
+	}];
+}
+
+- (void)deleteNote:(Note *)aNote
+{
+	NSLog(@&amp;quot;Delete a note with ID &amp;gt;&amp;gt; %@&amp;quot;, aNote.noteID);
+	[self.httpClient deletePath:[NSString stringWithFormat:@&amp;quot;notes/%@&amp;quot;,aNote.noteID] 
+	parameters:nil 
+	success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    		NSLog(@&amp;quot;%@&amp;quot;, [responseObject objectFromJSONData]);
+    		NSDictionary *dict = [responseObject objectFromJSONData];
+    		if ([dict[@&amp;quot;success&amp;quot;] integerValue] == 1) {
+        		[self.dataArray removeObjectAtIndex:self.indexPathToBeDeleted.row];
+        		[self.tableView deleteRowsAtIndexPaths:@[self.indexPathToBeDeleted]
+        	withRowAnimation:UITableViewRowAnimationFade];
+    		}
+		} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    			NSLog(@&amp;quot;Failed to delete a note, ERROR &amp;gt;&amp;gt; %@&amp;quot;, error);
+	}];
+}
+
+
+
+- (void)updateNote:(Note *)aNote
+{
+	NSDictionary *parameters = @{@&amp;quot;title&amp;quot;: aNote.title,
+	 @&amp;quot;content&amp;quot;: aNote.content, 
+	 @&amp;quot;author&amp;quot;: aNote.author};
+	[self.httpClient putPath:[NSString stringWithFormat:@&amp;quot;notes/%@&amp;quot;,aNote.noteID]
+	parameters:parameters 
+	success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    		NSLog(@&amp;quot;%@&amp;quot;, [responseObject objectFromJSONData]);
+    		NSDictionary *dict = [responseObject objectFromJSONData];
+    		if ([dict[@&amp;quot;success&amp;quot;] integerValue] == 1) {
+        		[self.navigationController popViewControllerAnimated:YES];
+        		[self refreshList];
+    		}
+
+		} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    			NSLog(@&amp;quot;Failed to update a note, ERROR &amp;gt;&amp;gt; %@&amp;quot;, error);
+
+	}];
+}
+
+- (void)createNote:(Note *)aNote
+{
+	NSDictionary *parameters = @{@&amp;quot;title&amp;quot;: aNote.title,
+	 @&amp;quot;content&amp;quot;: aNote.content, 
+	 @&amp;quot;author&amp;quot;: aNote.author};
+
+	[self.httpClient postPath:@&amp;quot;notes&amp;quot; 
+	parameters:parameters 
+	success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    		NSLog(@&amp;quot;%@&amp;quot;, [responseObject objectFromJSONData]);
+    		NSDictionary *dict = [responseObject objectFromJSONData];
+    		if ([dict[@&amp;quot;success&amp;quot;] integerValue] == 1) {
+        		[self.navigationController popViewControllerAnimated:YES];
+        		[self refreshList];
+    		}
+		} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    			NSLog(@&amp;quot;Failed to create a note, ERROR &amp;gt;&amp;gt; %@&amp;quot;, error);
+	}];
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;iOS 端的具体逻辑也大致是这样了，整个教程就分 server 端 和 iOS 端 2个简洁的教程，具体看托管在 &lt;a href='https://github.com/levey/WhateverNote'&gt;GitHub&lt;/a&gt; 上的代码。&lt;/p&gt;
+
+&lt;p&gt;实际项目往往复杂很多，引用居里夫人的话：&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Life is not easy for any of us.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;咖啡馆坐累了， 回家睡觉。&lt;/p&gt;</content>
  </entry>
  
  <entry>
@@ -51,7 +198,7 @@
 
 &lt;h4 id='delegate'&gt;Delegate&lt;/h4&gt;
 
-&lt;h5 id='id5'&gt;好处&lt;/h5&gt;
+&lt;h5 id='id69'&gt;好处&lt;/h5&gt;
 
 &lt;p&gt;语法严格，所有方法必须被定义。&lt;/p&gt;
 
@@ -59,7 +206,7 @@
 
 &lt;p&gt;非常容易追踪，DEBUG 或者跳转到定义的时候很方便。&lt;/p&gt;
 
-&lt;h5 id='id6'&gt;坏处&lt;/h5&gt;
+&lt;h5 id='id70'&gt;坏处&lt;/h5&gt;
 
 &lt;p&gt;写的代码比较多。&lt;/p&gt;
 
@@ -69,13 +216,13 @@
 
 &lt;h4 id='block'&gt;Block&lt;/h4&gt;
 
-&lt;h5 id='id7'&gt;好处&lt;/h5&gt;
+&lt;h5 id='id71'&gt;好处&lt;/h5&gt;
 
 &lt;p&gt;匿名方法，不需要额外定义方法。&lt;/p&gt;
 
 &lt;p&gt;异步处理时的语法直观。&lt;/p&gt;
 
-&lt;h5 id='id8'&gt;坏处&lt;/h5&gt;
+&lt;h5 id='id72'&gt;坏处&lt;/h5&gt;
 
 &lt;p&gt;需要小心 retain cycle.&lt;/p&gt;
 
@@ -83,13 +230,13 @@
 
 &lt;h4 id='notification'&gt;Notification&lt;/h4&gt;
 
-&lt;h5 id='id9'&gt;好处&lt;/h5&gt;
+&lt;h5 id='id73'&gt;好处&lt;/h5&gt;
 
 &lt;p&gt;实现简单。&lt;/p&gt;
 
 &lt;p&gt;更新多个对象。&lt;/p&gt;
 
-&lt;h5 id='id10'&gt;坏处&lt;/h5&gt;
+&lt;h5 id='id74'&gt;坏处&lt;/h5&gt;
 
 &lt;p&gt;没有编译时检查。&lt;/p&gt;
 
@@ -101,7 +248,7 @@
 
 &lt;h4 id='kvo'&gt;KVO&lt;/h4&gt;
 
-&lt;h5 id='id11'&gt;好处&lt;/h5&gt;
+&lt;h5 id='id75'&gt;好处&lt;/h5&gt;
 
 &lt;p&gt;在2个对象间同步信息很方便。&lt;/p&gt;
 
@@ -109,7 +256,7 @@
 
 &lt;p&gt;可以 observe 嵌套的对象。&lt;/p&gt;
 
-&lt;h5 id='id12'&gt;坏处&lt;/h5&gt;
+&lt;h5 id='id76'&gt;坏处&lt;/h5&gt;
 
 &lt;p&gt;被监听的属性是需要用字符串来表示的，没有编译期间检查。&lt;/p&gt;
 
@@ -117,27 +264,29 @@
 
 &lt;p&gt;在对象销毁的时候需要移除 observer。&lt;/p&gt;
 
-&lt;h4 id='id13'&gt;总结&lt;/h4&gt;
+&lt;h4 id='id77'&gt;总结&lt;/h4&gt;
 
 &lt;p&gt;我个人比较倾向于使用 Delegate 和 Block 来在各对象之前交互（在有多个方法的时候我会使用Delegate）在少数需要更新多个对象的使用 Notification 和 KVO.&lt;/p&gt;</content>
  </entry>
  
  <entry>
-   <title>Objective-C / Node.js 贯穿 iOS app 前后端教程(一)</title>
+   <title>Objective-C / Node.js 编写 iOS app 前后端教程(一)</title>
    <link href="http://levey.github.com/blog/2012/12/13/build-ios-app-with-nodejs-server-1.html"/>
    <updated>2012-12-13T00:00:00+08:00</updated>
    <id>http://levey.github.com/blog/2012/12/13/build-ios-app-with-nodejs-server-1</id>
-   <content type="html">&lt;h4 id='id1'&gt;说明&lt;/h4&gt;
+   <content type="html">&lt;h4 id='id65'&gt;说明&lt;/h4&gt;
 
 &lt;p&gt;这是一篇很基础的教程，全篇通过制作一个叫 WhateverNote 的 app，来描述 iOS app 的前端和服务端交互的。&lt;/p&gt;
 
-&lt;p&gt;这份教程只是用于初学示例，有很多不严谨的地方（比如有些类型检查遗漏了），请多多包含 :)&lt;/p&gt;
+&lt;p&gt;这份教程只是用于初学示例，可能有很多不严谨的地方（比如有些类型检查遗漏了），请多多包含 :)&lt;/p&gt;
+
+&lt;p&gt;代码托管在 &lt;a href='https://github.com/levey/WhateverNote'&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h4 id='__'&gt;语言 / 框架&lt;/h4&gt;
 
 &lt;p&gt;iOS 端用到的语言就是 Objective-C, 为了方便我选择 &lt;a href='https://github.com/AFNetworking/AFNetworking'&gt;AFNetowrking&lt;/a&gt; 作为 HTTP 库 。服务器端本来想用 Ruby on Rails 或者 Sinatra 的，但是后来想试一试 Node.js 的体验，所以就用 Node.js了，选择的 web framework 是 express.js, 跟 Sinatra 是类似的，都比较轻量级。&lt;/p&gt;
 
-&lt;h4 id='id2'&gt;工具&lt;/h4&gt;
+&lt;h4 id='id66'&gt;工具&lt;/h4&gt;
 
 &lt;p&gt;iOS: &lt;code&gt;Xcode&lt;/code&gt;&lt;/p&gt;
 
@@ -250,7 +399,7 @@ exports.Note = db.model(&amp;#39;Note&amp;#39;,NoteSchema);&lt;/code&gt;&lt;/pre
 
 &lt;p&gt;来引入 Note 这个 model，之后在这个 controller 里就能新建 Note 对象了。&lt;/p&gt;
 
-&lt;h5 id='id3'&gt;创建路由&lt;/h5&gt;
+&lt;h5 id='id67'&gt;创建路由&lt;/h5&gt;
 
 &lt;p&gt;在 &lt;strong&gt;routes.js&lt;/strong&gt; 里追加如下 API&lt;/p&gt;
 
@@ -355,7 +504,7 @@ exports.destroy = function(req, res) {
   }
 }&lt;/code&gt;&lt;/pre&gt;
 
-&lt;h5 id='id4'&gt;测试&lt;/h5&gt;
+&lt;h5 id='id68'&gt;测试&lt;/h5&gt;
 
 &lt;p&gt;由于我们使用了 MongoDB 作为数据库，我们需要先安装，使用 Homebrew 安装很方便，终端执行&lt;/p&gt;
 

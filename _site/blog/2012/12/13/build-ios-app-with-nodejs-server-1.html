@@ -20,13 +20,14 @@
     <div class="four columns sidebar">
       <nav>
         <h2>Levey</h2>
+         <p> - </p>
         <ul>
-        <p>吾乃一介软件开发者。</p>
-        <p>吾在此分享我的生活以及工作中的思考和经历。</p>
-        <p>Generating skill list...</p>
-        <p>iOS</p> <p>Ruby on Rails</p> <p>Node.js</p> <p>kukuku...</p>
+        <p>iOS / Rails / Node Developer</p>
+        <p>Reader</p>
+        <p>Freelancer</p>
+        <p>Gamer</p>        
+        <p> - </p>
         
-
         <p style="margin-bottom: 10px;">
           Follow me:
           <div id="stalker">
@@ -43,21 +44,23 @@
       <p class="meta">
 <a href="/"><i class="home icon-home"></i></a>
 </p>
-<h2 class="title">Objective-C / Node.js 贯穿 iOS app 前后端教程(一)</h2>
+<h2 class="title">Objective-C / Node.js 编写 iOS app 前后端教程(一)</h2>
 
  <p class="signature"></p>
 <div id="post">
-<h4 id='id1'>说明</h4>
+<h4 id='id65'>说明</h4>
 
 <p>这是一篇很基础的教程，全篇通过制作一个叫 WhateverNote 的 app，来描述 iOS app 的前端和服务端交互的。</p>
 
-<p>这份教程只是用于初学示例，有很多不严谨的地方（比如有些类型检查遗漏了），请多多包含 :)</p>
+<p>这份教程只是用于初学示例，可能有很多不严谨的地方（比如有些类型检查遗漏了），请多多包含 :)</p>
+
+<p>代码托管在 <a href='https://github.com/levey/WhateverNote'>GitHub</a>.</p>
 
 <h4 id='__'>语言 / 框架</h4>
 
 <p>iOS 端用到的语言就是 Objective-C, 为了方便我选择 <a href='https://github.com/AFNetworking/AFNetworking'>AFNetowrking</a> 作为 HTTP 库 。服务器端本来想用 Ruby on Rails 或者 Sinatra 的，但是后来想试一试 Node.js 的体验，所以就用 Node.js了，选择的 web framework 是 express.js, 跟 Sinatra 是类似的，都比较轻量级。</p>
 
-<h4 id='id2'>工具</h4>
+<h4 id='id66'>工具</h4>
 
 <p>iOS: <code>Xcode</code></p>
 
@@ -170,7 +173,7 @@ exports.Note = db.model(&#39;Note&#39;,NoteSchema);</code></pre>
 
 <p>来引入 Note 这个 model，之后在这个 controller 里就能新建 Note 对象了。</p>
 
-<h5 id='id3'>创建路由</h5>
+<h5 id='id67'>创建路由</h5>
 
 <p>在 <strong>routes.js</strong> 里追加如下 API</p>
 
@@ -275,7 +278,7 @@ exports.destroy = function(req, res) {
   }
 }</code></pre>
 
-<h5 id='id4'>测试</h5>
+<h5 id='id68'>测试</h5>
 
 <p>由于我们使用了 MongoDB 作为数据库，我们需要先安装，使用 Homebrew 安装很方便，终端执行</p>
 
@@ -311,7 +314,7 @@ puts response.body</code></pre>
   <h3>Related Posts</h3>
   <ul class="posts">
     
-    <li><span>2012-12-21 &raquo;</span> <a href="/blog/2012/12/21/build-ios-app-with-nodejs-server-2.html">Objective-C / Node.js 贯穿 iOS app 前后端教程(二)</a></li>
+    <li><span>2012-12-21 &raquo;</span> <a href="/blog/2012/12/21/build-ios-app-with-nodejs-server-2.html">Objective-C / Node.js 编写 iOS app 前后端教程(二)</a></li>
     
     <li><span>2012-12-20 &raquo;</span> <a href="/blog/2012/12/20/delegate-vs-blcok-vs-notification-vs-kvo.html">Delegate vs Blcok vs Notification vs KVO</a></li>
     

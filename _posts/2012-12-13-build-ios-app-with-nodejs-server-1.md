@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Objective-C / Node.js 贯穿 iOS app 前后端教程(一)"
+title: "Objective-C / Node.js 编写 iOS app 前后端教程(一)"
 description: ""
 category: blog
 tags: ["iOS", "Node.js"]
@@ -11,7 +11,9 @@ tags: ["iOS", "Node.js"]
 
 这是一篇很基础的教程，全篇通过制作一个叫 WhateverNote 的 app，来描述 iOS app 的前端和服务端交互的。
 
-这份教程只是用于初学示例，有很多不严谨的地方（比如有些类型检查遗漏了），请多多包含 :)
+这份教程只是用于初学示例，可能有很多不严谨的地方（比如有些类型检查遗漏了），请多多包含 :)
+
+代码托管在 [GitHub](https://github.com/levey/WhateverNote).
 
 #### 语言 / 框架
 

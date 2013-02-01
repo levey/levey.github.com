@@ -13,42 +13,21 @@
   <link rel="stylesheet" href="/css/screen.css">
   <link rel="stylesheet" href="/css/layout.css">
   <link rel="stylesheet" href="/fonts/font-awesome.css">
-
+  <link rel="stylesheet" href="/css/pygments.css">
 </head>
 <body>
   <div class="container">
-    <div class="four columns sidebar">
-      <nav>
-        <h2>Levey</h2>
-         <p> - </p>
-        <ul>
-        <p>iOS / Rails / Node Developer</p>
-        <p>Reader</p>
-        <p>Freelancer</p>
-        <p>Gamer</p>        
-        <p> - </p>
-        
-        <p style="margin-bottom: 10px;">
-          Follow me:
-          <div id="stalker">
-            <a title="Levey on Github" target = "_blank" href="http://github.com/levey/"><i class="icon-github icon-large"></i></a>
-            <a title="Levey on Twitter" target = "_blank" href="http://twitter.com/leveyzhu"><i class="icon-twitter icon-large"></i></a>
-            <a title="RSS feed" target = "_blank" href="/atom.xml"><i class="icon-rss icon-large"></i></a>
-          </div>
-        </p>
-        </ul>
-      </nav>
-    </div>
 
-    <div class="eleven columns content">
-      <p class="meta">
-<a href="/"><i class="home icon-home"></i></a>
+    <div class="fourteen columns content">
+      <div roll="main" class="secondary">
+<p class="meta">
+<a href="/blog.html"><i class="home icon-home"></i></a>
 </p>
-<h2 class="title">Objective-C / Node.js 编写 iOS app 前后端教程(一)</h2>
+<h2 class="title">Objective-C / Node.js 编写 iOS app 前后端教程 - Node.js Server</h2>
 
  <p class="signature"></p>
 <div id="post">
-<h4 id='id65'>说明</h4>
+<h4 id='id2072'>说明</h4>
 
 <p>这是一篇很基础的教程，全篇通过制作一个叫 WhateverNote 的 app，来描述 iOS app 的前端和服务端交互的。</p>
 
@@ -60,7 +39,7 @@
 
 <p>iOS 端用到的语言就是 Objective-C, 为了方便我选择 <a href='https://github.com/AFNetworking/AFNetworking'>AFNetowrking</a> 作为 HTTP 库 。服务器端本来想用 Ruby on Rails 或者 Sinatra 的，但是后来想试一试 Node.js 的体验，所以就用 Node.js了，选择的 web framework 是 express.js, 跟 Sinatra 是类似的，都比较轻量级。</p>
 
-<h4 id='id66'>工具</h4>
+<h4 id='id2073'>工具</h4>
 
 <p>iOS: <code>Xcode</code></p>
 
@@ -173,7 +152,7 @@ exports.Note = db.model(&#39;Note&#39;,NoteSchema);</code></pre>
 
 <p>来引入 Note 这个 model，之后在这个 controller 里就能新建 Note 对象了。</p>
 
-<h5 id='id67'>创建路由</h5>
+<h5 id='id2074'>创建路由</h5>
 
 <p>在 <strong>routes.js</strong> 里追加如下 API</p>
 
@@ -278,7 +257,7 @@ exports.destroy = function(req, res) {
   }
 }</code></pre>
 
-<h5 id='id68'>测试</h5>
+<h5 id='id2075'>测试</h5>
 
 <p>由于我们使用了 MongoDB 作为数据库，我们需要先安装，使用 Homebrew 安装很方便，终端执行</p>
 
@@ -314,7 +293,7 @@ puts response.body</code></pre>
   <h3>Related Posts</h3>
   <ul class="posts">
     
-    <li><span>2012-12-21 &raquo;</span> <a href="/blog/2012/12/21/build-ios-app-with-nodejs-server-2.html">Objective-C / Node.js 编写 iOS app 前后端教程(二)</a></li>
+    <li><span>2012-12-21 &raquo;</span> <a href="/blog/2012/12/21/build-ios-app-with-nodejs-server-2.html">Objective-C / Node.js 编写 iOS app 前后端教程-  iOS Client</a></li>
     
     <li><span>2012-12-20 &raquo;</span> <a href="/blog/2012/12/20/delegate-vs-blcok-vs-notification-vs-kvo.html">Delegate vs Blcok vs Notification vs KVO</a></li>
     
@@ -322,29 +301,10 @@ puts response.body</code></pre>
     
   </ul>
 </div>
+
+</div>
     
-<!--       <div class="footer">
-          <div class="disclaimer">
-          <p>The postings on this site are my own and don't necessarily represent my 
-          employer’s positions, strategies or opinions.</p>
-        </div>
-      </div> -->
     </div>
   </div>
-
-<!-- <script type="text/javascript">
-
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-13005539-2']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script> -->
-
 </body>
 </html>

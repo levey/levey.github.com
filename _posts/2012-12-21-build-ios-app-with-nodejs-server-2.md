@@ -46,38 +46,44 @@ Node.js: `Sublime Text 2` / ` iTerm 2`
 
 **Note.h**
 
-	@interface Note : NSObject
 
-	@property (nonatomic, strong) NSString *noteID;
-	@property (nonatomic, strong) NSString *title;
-	@property (nonatomic, strong) NSString *content;
-	@property (nonatomic, strong) NSString *author;
 
-	- (id)initWithAttributes:(NSDictionary *)attributes;
+    @interface Note : NSObject
+    @property (nonatomic, strong) NSString *noteID;
+    @property (nonatomic, strong) NSString *title;
+    @property (nonatomic, strong) NSString *content;
+    @property (nonatomic, strong) NSString *author;
 
-	@end
+    - (id)initWithAttributes:(NSDictionary *)attributes;
+
+    @end
+
 
 
 **Note.m**
 
-	#import "Note.h"
+{% highlight objc %}
 
-	@implementation Note
+#import "Note.h"
 
-	- (id)initWithAttributes:(NSDictionary *)attributes
-	{
-    	self = [super init];
-    	if (self) {
-        	_noteID = [attributes valueForKeyPath:@"_id"];
-        	_title = [attributes valueForKeyPath:@"title"];
-        	_content = [attributes valueForKeyPath:@"content"];
-        	_author = [attributes valueForKeyPath:@"author"];
-    	}
+@implementation Note
 
-    	return self;
+- (id)initWithAttributes:(NSDictionary *)attributes
+{
+	self = [super init];
+	if (self) {
+    	_noteID = [attributes valueForKeyPath:@"_id"];
+    	_title = [attributes valueForKeyPath:@"title"];
+    	_content = [attributes valueForKeyPath:@"content"];
+    	_author = [attributes valueForKeyPath:@"author"];
 	}
 
-	@end
+	return self;
+}
+
+@end
+
+{% endhighlight %}
 	
 接下来在 Note List 页面，我们会把从 server 端获取的 json 数据 解析成一个都是 Note 对象的列表。
 
@@ -96,86 +102,90 @@ NoteViewConrller 功能是新增、查看、更新单个 Note 的信息 (通过�
 
 **NoteListViewController.m**
 
-	-(void)refreshList
-	{    
-    	[self.httpClient getPath:@"notes" parameters:nil
-    	 success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        		NSArray *responseArray = [responseObject objectFromJSONData];
-        		NSLog(@"%@", responseArray);
-        
-        		NSMutableArray *mArr = [NSMutableArray array];
-        		for (NSDictionary *attributes in responseArray) {
-            		Note *note = [[Note alloc] initWithAttributes:attributes];
-            		[mArr addObject:note];
-        		}
-        		self.dataArray = mArr;
-        		[self.tableView reloadData];
+{% highlight objc %}
 
-    		} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        			NSLog(@"Failed to get note list, ERROR >> %@", error);
-    	}];
-	}
-	
-	- (void)deleteNote:(Note *)aNote
-	{
-    	NSLog(@"Delete a note with ID >> %@", aNote.noteID);
-    	[self.httpClient deletePath:[NSString stringWithFormat:@"notes/%@",aNote.noteID] 
-    	parameters:nil 
-    	success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        		NSLog(@"%@", [responseObject objectFromJSONData]);
-        		NSDictionary *dict = [responseObject objectFromJSONData];
-        		if ([dict[@"success"] integerValue] == 1) {
-            		[self.dataArray removeObjectAtIndex:self.indexPathToBeDeleted.row];
-            		[self.tableView deleteRowsAtIndexPaths:@[self.indexPathToBeDeleted]
-            	withRowAnimation:UITableViewRowAnimationFade];
-        		}
-    		} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        			NSLog(@"Failed to delete a note, ERROR >> %@", error);
-    	}];
-	}
-	
-	
+-(void)refreshList
+{    
+	[self.httpClient getPath:@"notes" parameters:nil
+	 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    		NSArray *responseArray = [responseObject objectFromJSONData];
+    		NSLog(@"%@", responseArray);
+    
+    		NSMutableArray *mArr = [NSMutableArray array];
+    		for (NSDictionary *attributes in responseArray) {
+        		Note *note = [[Note alloc] initWithAttributes:attributes];
+        		[mArr addObject:note];
+    		}
+    		self.dataArray = mArr;
+    		[self.tableView reloadData];
 
-	- (void)updateNote:(Note *)aNote
-	{
-    	NSDictionary *parameters = @{@"title": aNote.title,
-    	 @"content": aNote.content, 
-    	 @"author": aNote.author};
-    	[self.httpClient putPath:[NSString stringWithFormat:@"notes/%@",aNote.noteID]
-    	parameters:parameters 
-    	success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        		NSLog(@"%@", [responseObject objectFromJSONData]);
-        		NSDictionary *dict = [responseObject objectFromJSONData];
-        		if ([dict[@"success"] integerValue] == 1) {
-            		[self.navigationController popViewControllerAnimated:YES];
-            		[self refreshList];
-        		}
+		} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    			NSLog(@"Failed to get note list, ERROR >> %@", error);
+	}];
+}
 
-    		} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        			NSLog(@"Failed to update a note, ERROR >> %@", error);
+- (void)deleteNote:(Note *)aNote
+{
+	NSLog(@"Delete a note with ID >> %@", aNote.noteID);
+	[self.httpClient deletePath:[NSString stringWithFormat:@"notes/%@",aNote.noteID] 
+	parameters:nil 
+	success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    		NSLog(@"%@", [responseObject objectFromJSONData]);
+    		NSDictionary *dict = [responseObject objectFromJSONData];
+    		if ([dict[@"success"] integerValue] == 1) {
+        		[self.dataArray removeObjectAtIndex:self.indexPathToBeDeleted.row];
+        		[self.tableView deleteRowsAtIndexPaths:@[self.indexPathToBeDeleted]
+        	withRowAnimation:UITableViewRowAnimationFade];
+    		}
+		} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    			NSLog(@"Failed to delete a note, ERROR >> %@", error);
+	}];
+}
 
-    	}];
-	}
 
-	- (void)createNote:(Note *)aNote
-	{
-    	NSDictionary *parameters = @{@"title": aNote.title,
-    	 @"content": aNote.content, 
-    	 @"author": aNote.author};
 
-    	[self.httpClient postPath:@"notes" 
-    	parameters:parameters 
-    	success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        		NSLog(@"%@", [responseObject objectFromJSONData]);
-        		NSDictionary *dict = [responseObject objectFromJSONData];
-        		if ([dict[@"success"] integerValue] == 1) {
-            		[self.navigationController popViewControllerAnimated:YES];
-            		[self refreshList];
-        		}
-    		} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        			NSLog(@"Failed to create a note, ERROR >> %@", error);
-    	}];
-	}
+- (void)updateNote:(Note *)aNote
+{
+	NSDictionary *parameters = @{@"title": aNote.title,
+	 @"content": aNote.content, 
+	 @"author": aNote.author};
+	[self.httpClient putPath:[NSString stringWithFormat:@"notes/%@",aNote.noteID]
+	parameters:parameters 
+	success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    		NSLog(@"%@", [responseObject objectFromJSONData]);
+    		NSDictionary *dict = [responseObject objectFromJSONData];
+    		if ([dict[@"success"] integerValue] == 1) {
+        		[self.navigationController popViewControllerAnimated:YES];
+        		[self refreshList];
+    		}
+
+		} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    			NSLog(@"Failed to update a note, ERROR >> %@", error);
+
+	}];
+}
+
+- (void)createNote:(Note *)aNote
+{
+	NSDictionary *parameters = @{@"title": aNote.title,
+	 @"content": aNote.content, 
+	 @"author": aNote.author};
+
+	[self.httpClient postPath:@"notes" 
+	parameters:parameters 
+	success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    		NSLog(@"%@", [responseObject objectFromJSONData]);
+    		NSDictionary *dict = [responseObject objectFromJSONData];
+    		if ([dict[@"success"] integerValue] == 1) {
+        		[self.navigationController popViewControllerAnimated:YES];
+        		[self refreshList];
+    		}
+		} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    			NSLog(@"Failed to create a note, ERROR >> %@", error);
+	}];
+}
+
+{% endhighlight %}
 	
 
 iOS 端的具体逻辑也大致是这样了，整个教程就分 server 端 和 iOS 端 2个简洁的教程，具体看托管在 [GitHub](https://github.com/levey/WhateverNote) 上的代码。

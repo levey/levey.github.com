@@ -5,7 +5,6 @@ description: ""
 category: blog
 tags: []
 ---
-{% include JB/setup %}
 
 
 这篇博客意在帮助有想从 Linode 迁移网站到 Heroku 的读者.

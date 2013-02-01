@@ -29,77 +29,94 @@
 <div id="post">
 <p>最近在工作中遇到对使用 Delegate 和 Notification 的争议，我写下了自己的观点。</p>
 
-<h4 id='delegate'>Delegate</h4>
+<h4>Delegate</h4>
 
-<h5 id='id2076'>好处</h5>
+<hr />
 
-<p>语法严格，所有方法必须被定义。</p>
+<h5>优点：</h5>
 
-<p>编译期的检查，Warning 或者 Error。</p>
+<ol>
+<li><p>语法严格，所有方法必须被定义。</p></li>
+<li><p>编译期的检查，Warning 或者 Error。</p></li>
+<li><p>非常容易追踪，DEBUG 或者跳转到定义的时候很方便。</p></li>
+</ol>
 
-<p>非常容易追踪，DEBUG 或者跳转到定义的时候很方便。</p>
 
-<h5 id='id2077'>坏处</h5>
+<h5>缺点：</h5>
 
-<p>写的代码比较多。</p>
+<ol>
+<li><p>写的代码比较多。</p></li>
+<li><p>需要检查 delegate 是否为空指针。</p></li>
+<li><p>一对多实现困难。</p></li>
+</ol>
 
-<p>需要检查 delegate 是否为空指针。</p>
 
-<p>一对多实现困难。</p>
+<h4>Block</h4>
 
-<h4 id='block'>Block</h4>
+<h5>优点：</h5>
 
-<h5 id='id2078'>好处</h5>
+<ol>
+<li><p>匿名方法，不需要额外定义方法。</p></li>
+<li><p>异步处理时的语法直观。</p></li>
+</ol>
 
-<p>匿名方法，不需要额外定义方法。</p>
 
-<p>异步处理时的语法直观。</p>
+<h5>缺点：</h5>
 
-<h5 id='id2079'>坏处</h5>
+<ol>
+<li><p>使用 ARC 时需要小心 retain cycle.</p></li>
+<li><p>传入 block 的对象需要做处理。</p></li>
+</ol>
 
-<p>需要小心 retain cycle.</p>
 
-<p>传入 block 的对象需要做处理。</p>
+<h4>Notification</h4>
 
-<h4 id='notification'>Notification</h4>
+<hr />
 
-<h5 id='id2080'>好处</h5>
+<h5>优点：</h5>
 
-<p>实现简单。</p>
+<ol>
+<li><p>实现简单。</p></li>
+<li><p>更新多个对象。</p></li>
+</ol>
 
-<p>更新多个对象。</p>
 
-<h5 id='id2081'>坏处</h5>
+<h5>缺点：</h5>
 
-<p>没有编译时检查。</p>
+<ol>
+<li><p>没有编译时检查。</p></li>
+<li><p>在不需要的时候需要注销通知。</p></li>
+<li><p>不可追踪（DEBUG）。</p></li>
+<li><p>通知的名字需要在 controller 和 observer 都被知道,如果稍有写错,后果不堪,不好维护。</p></li>
+</ol>
 
-<p>在不需要的时候需要注销通知。</p>
 
-<p>不可追踪（DEBUG）。</p>
+<h4>KVO</h4>
 
-<p>通知的名字需要在 controller 和 observer 都被知道,如果稍有写错,后果不堪。</p>
+<hr />
 
-<h4 id='kvo'>KVO</h4>
+<h5>优点：</h5>
 
-<h5 id='id2082'>好处</h5>
+<ol>
+<li><p>在2个对象间同步信息很方便。</p></li>
+<li><p>能提供一个对象的新的值和旧的值。</p></li>
+<li><p>可以 observe 嵌套的对象。</p></li>
+</ol>
 
-<p>在2个对象间同步信息很方便。</p>
 
-<p>能提供一个对象的新的值和旧的值。</p>
+<h5>缺点：</h5>
 
-<p>可以 observe 嵌套的对象。</p>
+<ol>
+<li><p>被监听的属性是需要用字符串来表示的，没有编译期间检查。</p></li>
+<li><p>属性的改动导致 observe 失效。</p></li>
+<li><p>在对象销毁的时候需要移除 observer。</p></li>
+</ol>
 
-<h5 id='id2083'>坏处</h5>
 
-<p>被监听的属性是需要用字符串来表示的，没有编译期间检查。</p>
+<h4>总结</h4>
 
-<p>属性的改动导致 observe 失效。</p>
+<p>我个人比较倾向于使用 Delegate 和 Block 来在各对象之前交互（在有多个方法的时候我会使用Delegate）在少数需要更新多个对象的使用 Notification  和 KVO.</p>
 
-<p>在对象销毁的时候需要移除 observer。</p>
-
-<h4 id='id2084'>总结</h4>
-
-<p>我个人比较倾向于使用 Delegate 和 Block 来在各对象之前交互（在有多个方法的时候我会使用Delegate）在少数需要更新多个对象的使用 Notification 和 KVO.</p>
 
  <p class="signature">2012-12-20  written by levey </p>
 </div>

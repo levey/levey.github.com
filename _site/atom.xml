@@ -4,7 +4,7 @@
  <title>Levey</title>
  <link href="http://levey.github.com/atom.xml" rel="self"/>
  <link href="http://levey.github.com/"/>
- <updated>2013-02-01T16:42:44+08:00</updated>
+ <updated>2013-02-16T11:54:27+08:00</updated>
  <id>http://levey.github.com/</id>
  <author>
    <name>Levey</name>
@@ -17,27 +17,31 @@
    <link href="http://levey.github.com/blog/2012/12/21/build-ios-app-with-nodejs-server-2.html"/>
    <updated>2012-12-21T00:00:00+08:00</updated>
    <id>http://levey.github.com/blog/2012/12/21/build-ios-app-with-nodejs-server-2</id>
-   <content type="html">&lt;h4 id='id2085'&gt;说明&lt;/h4&gt;
+   <content type="html">&lt;p&gt;Liquid error: No such file or directory - /Users/levey/Dev/Github/levey.github.com/_includes&lt;/p&gt;
+
+&lt;h4&gt;说明&lt;/h4&gt;
 
 &lt;p&gt;这是一篇很基础的教程，全篇通过制作一个叫 WhateverNote 的 app，来描述 iOS app 的前端和服务端交互的。&lt;/p&gt;
 
 &lt;p&gt;这份教程只是用于初学示例，可能有很多不严谨的地方（比如有些类型检查遗漏了），请多多包含 :)&lt;/p&gt;
 
-&lt;p&gt;代码托管在 &lt;a href='https://github.com/levey/WhateverNote'&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;代码托管在 &lt;a href=&quot;https://github.com/levey/WhateverNote&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
 
-&lt;h4 id='__'&gt;语言 / 框架&lt;/h4&gt;
+&lt;h4&gt;语言 / 框架&lt;/h4&gt;
 
-&lt;p&gt;iOS 端用到的语言就是 Objective-C, 为了方便我选择 &lt;a href='https://github.com/AFNetworking/AFNetworking'&gt;AFNetowrking&lt;/a&gt; 作为 HTTP 库 。服务器端本来想用 Ruby on Rails 或者 Sinatra 的，但是后来想试一试 Node.js 的体验，所以就用 Node.js了，选择的 web framework 是 express.js, 跟 Sinatra 是类似的，都比较轻量级。&lt;/p&gt;
+&lt;p&gt;iOS 端用到的语言就是 Objective-C, 为了方便我选择 &lt;a href=&quot;https://github.com/AFNetworking/AFNetworking&quot;&gt;AFNetowrking&lt;/a&gt; 作为 HTTP 库 。服务器端本来想用 Ruby on Rails  或者 Sinatra 的，但是后来想试一试 Node.js 的体验，所以就用 Node.js了，选择的 web framework 是 express.js, 跟 Sinatra 是类似的，都比较轻量级。&lt;/p&gt;
 
-&lt;h4 id='id2086'&gt;工具&lt;/h4&gt;
+&lt;h4&gt;工具&lt;/h4&gt;
 
-&lt;p&gt;iOS: &lt;code&gt;Xcode&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;iOS:  &lt;code&gt;Xcode&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;Node.js: &lt;code&gt;Sublime Text 2&lt;/code&gt; / &lt;code&gt; iTerm 2&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Node.js: &lt;code&gt;Sublime Text 2&lt;/code&gt; / &lt;code&gt;iTerm 2&lt;/code&gt;&lt;/p&gt;
+
 &lt;hr /&gt;
-&lt;h4 id='whatevernote__ios'&gt;WhateverNote - iOS&lt;/h4&gt;
 
-&lt;h6 id='id2087'&gt;准备工作&lt;/h6&gt;
+&lt;h4&gt;WhateverNote - iOS&lt;/h4&gt;
+
+&lt;h6&gt;准备工作&lt;/h6&gt;
 
 &lt;p&gt;首先，使用 Xcode 新建一个名为 WhateverNote 的空项目。&lt;/p&gt;
 
@@ -45,147 +49,156 @@
 
 &lt;p&gt;然后从网上下载 &lt;strong&gt;AFNetworking&lt;/strong&gt;, &lt;strong&gt;JSONKit&lt;/strong&gt; 这2个第三方库到 3rd-party 目录下，然后引用进项目。&lt;/p&gt;
 
-&lt;h5 id='_model'&gt;实现 Model&lt;/h5&gt;
+&lt;h5&gt;实现 Model&lt;/h5&gt;
 
 &lt;p&gt;由于 WhateverNote 比较简单，就一个 model，而且属性也只有三个，所以 我们只要在 Model 目录下新建 &lt;strong&gt;Note.h&lt;/strong&gt; 和 &lt;strong&gt;Note.m&lt;/strong&gt;.代码如下：&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Note.h&lt;/strong&gt;&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;@interface Note : NSObject
-@property (nonatomic, strong) NSString *noteID;
-@property (nonatomic, strong) NSString *title;
-@property (nonatomic, strong) NSString *content;
-@property (nonatomic, strong) NSString *author;
+&lt;p&gt;@interface Note : NSObject&lt;/p&gt;
 
-- (id)initWithAttributes:(NSDictionary *)attributes;
+&lt;p&gt;@property (nonatomic, strong) NSString &lt;em&gt;noteID;
+@property (nonatomic, strong) NSString &lt;/em&gt;title;
+@property (nonatomic, strong) NSString &lt;em&gt;content;
+@property (nonatomic, strong) NSString &lt;/em&gt;author;&lt;/p&gt;
 
-@end&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;(id)initWithAttributes:(NSDictionary *)attributes;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;@end&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Note.m&lt;/strong&gt;&lt;/p&gt;
-&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='objc'&gt;&lt;span class='cp'&gt;#import &amp;quot;Note.h&amp;quot;&lt;/span&gt;
 
-&lt;span class='k'&gt;@implementation&lt;/span&gt; &lt;span class='nc'&gt;Note&lt;/span&gt;
+&lt;h1&gt;import &quot;Note.h&quot;&lt;/h1&gt;
 
-&lt;span class='k'&gt;-&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='kt'&gt;id&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;&lt;span class='nf'&gt;initWithAttributes:&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;NSDictionary&lt;/span&gt; &lt;span class='o'&gt;*&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;&lt;span class='nv'&gt;attributes&lt;/span&gt;
-&lt;span class='p'&gt;{&lt;/span&gt;
-	&lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='n'&gt;super&lt;/span&gt; &lt;span class='n'&gt;init&lt;/span&gt;&lt;span class='p'&gt;];&lt;/span&gt;
-	&lt;span class='k'&gt;if&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;self&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt;
-    	&lt;span class='n'&gt;_noteID&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='n'&gt;attributes&lt;/span&gt; &lt;span class='n'&gt;valueForKeyPath&lt;/span&gt;&lt;span class='o'&gt;:&lt;/span&gt;&lt;span class='s'&gt;@&amp;quot;_id&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;];&lt;/span&gt;
-    	&lt;span class='n'&gt;_title&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='n'&gt;attributes&lt;/span&gt; &lt;span class='n'&gt;valueForKeyPath&lt;/span&gt;&lt;span class='o'&gt;:&lt;/span&gt;&lt;span class='s'&gt;@&amp;quot;title&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;];&lt;/span&gt;
-    	&lt;span class='n'&gt;_content&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='n'&gt;attributes&lt;/span&gt; &lt;span class='n'&gt;valueForKeyPath&lt;/span&gt;&lt;span class='o'&gt;:&lt;/span&gt;&lt;span class='s'&gt;@&amp;quot;content&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;];&lt;/span&gt;
-    	&lt;span class='n'&gt;_author&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='n'&gt;attributes&lt;/span&gt; &lt;span class='n'&gt;valueForKeyPath&lt;/span&gt;&lt;span class='o'&gt;:&lt;/span&gt;&lt;span class='s'&gt;@&amp;quot;author&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;];&lt;/span&gt;
-	&lt;span class='p'&gt;}&lt;/span&gt;
+&lt;p&gt;@implementation Note&lt;/p&gt;
 
-	&lt;span class='k'&gt;return&lt;/span&gt; &lt;span class='n'&gt;self&lt;/span&gt;&lt;span class='p'&gt;;&lt;/span&gt;
-&lt;span class='p'&gt;}&lt;/span&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;(id)initWithAttributes:(NSDictionary *)attributes
+{
+  self = [super init];
+  if (self) {
+      &lt;em&gt;noteID = [attributes valueForKeyPath:@&quot;&lt;/em&gt;id&quot;];
+      &lt;em&gt;title = [attributes valueForKeyPath:@&quot;title&quot;];
+      &lt;/em&gt;content = [attributes valueForKeyPath:@&quot;content&quot;];
+      _author = [attributes valueForKeyPath:@&quot;author&quot;];
+  }&lt;/p&gt;
 
-&lt;span class='k'&gt;@end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;p&gt;  return self;
+}&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;@end&lt;/p&gt;
+
 &lt;p&gt;接下来在 Note List 页面，我们会把从 server 端获取的 json 数据 解析成一个都是 Note 对象的列表。&lt;/p&gt;
 
-&lt;h5 id='_controller'&gt;实现 Controller&lt;/h5&gt;
+&lt;h5&gt;实现 Controller&lt;/h5&gt;
 
 &lt;p&gt;在 Controller 目录下新建 &lt;strong&gt;NoteListViewController&lt;/strong&gt; 和 &lt;strong&gt;NoteViewController&lt;/strong&gt;.&lt;/p&gt;
 
-&lt;p&gt;NoteListViewController 继承自 UITableViewController, 功能是显示已存在 server 的 note 列表，能对列表的 cell 做删除，从而删除 server 上一个对应的 note. NoteViewConrller 功能是新增、查看、更新单个 Note 的信息 (通过回调给 NoteListViewController 执行)。&lt;/p&gt;
+&lt;p&gt;NoteListViewController 继承自 UITableViewController, 功能是显示已存在 server 的 note 列表，能对列表的 cell 做删除，从而删除 server 上一个对应的 note.
+NoteViewConrller 功能是新增、查看、更新单个 Note 的信息 (通过回调给 NoteListViewController 执行)。&lt;/p&gt;
 
 &lt;p&gt;由于 API 是 RESTful 风格，我就直接使用了 AFNetworking 的 HTTPClient 类。&lt;/p&gt;
 
 &lt;p&gt;以下是网络请求的代码:&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;NoteListViewController.m&lt;/strong&gt;&lt;/p&gt;
-&lt;div class='highlight'&gt;&lt;pre&gt;&lt;code class='objc'&gt;&lt;span class='k'&gt;-&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='kt'&gt;void&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;&lt;span class='nf'&gt;refreshList&lt;/span&gt;
-&lt;span class='p'&gt;{&lt;/span&gt;    
-	&lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='n'&gt;self&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;&lt;span class='n'&gt;httpClient&lt;/span&gt; &lt;span class='n'&gt;getPath&lt;/span&gt;&lt;span class='o'&gt;:&lt;/span&gt;&lt;span class='s'&gt;@&amp;quot;notes&amp;quot;&lt;/span&gt; &lt;span class='n'&gt;parameters&lt;/span&gt;&lt;span class='o'&gt;:&lt;/span&gt;&lt;span class='nb'&gt;nil&lt;/span&gt;
-	 &lt;span class='nl'&gt;success:&lt;/span&gt;&lt;span class='o'&gt;^&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;AFHTTPRequestOperation&lt;/span&gt; &lt;span class='o'&gt;*&lt;/span&gt;&lt;span class='n'&gt;operation&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='kt'&gt;id&lt;/span&gt; &lt;span class='n'&gt;responseObject&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt;
-    		&lt;span class='n'&gt;NSArray&lt;/span&gt; &lt;span class='o'&gt;*&lt;/span&gt;&lt;span class='n'&gt;responseArray&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='n'&gt;responseObject&lt;/span&gt; &lt;span class='n'&gt;objectFromJSONData&lt;/span&gt;&lt;span class='p'&gt;];&lt;/span&gt;
-    		&lt;span class='n'&gt;NSLog&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s'&gt;@&amp;quot;%@&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='n'&gt;responseArray&lt;/span&gt;&lt;span class='p'&gt;);&lt;/span&gt;
-    
-    		&lt;span class='n'&gt;NSMutableArray&lt;/span&gt; &lt;span class='o'&gt;*&lt;/span&gt;&lt;span class='n'&gt;mArr&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='n'&gt;NSMutableArray&lt;/span&gt; &lt;span class='n'&gt;array&lt;/span&gt;&lt;span class='p'&gt;];&lt;/span&gt;
-    		&lt;span class='k'&gt;for&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;NSDictionary&lt;/span&gt; &lt;span class='o'&gt;*&lt;/span&gt;&lt;span class='n'&gt;attributes&lt;/span&gt; &lt;span class='k'&gt;in&lt;/span&gt; &lt;span class='n'&gt;responseArray&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt;
-        		&lt;span class='n'&gt;Note&lt;/span&gt; &lt;span class='o'&gt;*&lt;/span&gt;&lt;span class='n'&gt;note&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='p'&gt;[[&lt;/span&gt;&lt;span class='n'&gt;Note&lt;/span&gt; &lt;span class='n'&gt;alloc&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt; &lt;span class='n'&gt;initWithAttributes&lt;/span&gt;&lt;span class='o'&gt;:&lt;/span&gt;&lt;span class='n'&gt;attributes&lt;/span&gt;&lt;span class='p'&gt;];&lt;/span&gt;
-        		&lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='n'&gt;mArr&lt;/span&gt; &lt;span class='n'&gt;addObject&lt;/span&gt;&lt;span class='o'&gt;:&lt;/span&gt;&lt;span class='n'&gt;note&lt;/span&gt;&lt;span class='p'&gt;];&lt;/span&gt;
-    		&lt;span class='p'&gt;}&lt;/span&gt;
-    		&lt;span class='n'&gt;self&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;&lt;span class='n'&gt;dataArray&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='n'&gt;mArr&lt;/span&gt;&lt;span class='p'&gt;;&lt;/span&gt;
-    		&lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='n'&gt;self&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;&lt;span class='n'&gt;tableView&lt;/span&gt; &lt;span class='n'&gt;reloadData&lt;/span&gt;&lt;span class='p'&gt;];&lt;/span&gt;
 
-		&lt;span class='p'&gt;}&lt;/span&gt; &lt;span class='n'&gt;failure&lt;/span&gt;&lt;span class='o'&gt;:^&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;AFHTTPRequestOperation&lt;/span&gt; &lt;span class='o'&gt;*&lt;/span&gt;&lt;span class='n'&gt;operation&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='n'&gt;NSError&lt;/span&gt; &lt;span class='o'&gt;*&lt;/span&gt;&lt;span class='n'&gt;error&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt;
-    			&lt;span class='n'&gt;NSLog&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s'&gt;@&amp;quot;Failed to get note list, ERROR &amp;gt;&amp;gt; %@&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='n'&gt;error&lt;/span&gt;&lt;span class='p'&gt;);&lt;/span&gt;
-	&lt;span class='p'&gt;}];&lt;/span&gt;
-&lt;span class='p'&gt;}&lt;/span&gt;
+&lt;p&gt;-(void)refreshList
+{&lt;/p&gt;
 
-&lt;span class='k'&gt;-&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='kt'&gt;void&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;&lt;span class='nf'&gt;deleteNote:&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;Note&lt;/span&gt; &lt;span class='o'&gt;*&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;&lt;span class='nv'&gt;aNote&lt;/span&gt;
-&lt;span class='p'&gt;{&lt;/span&gt;
-	&lt;span class='n'&gt;NSLog&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s'&gt;@&amp;quot;Delete a note with ID &amp;gt;&amp;gt; %@&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='n'&gt;aNote&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;&lt;span class='n'&gt;noteID&lt;/span&gt;&lt;span class='p'&gt;);&lt;/span&gt;
-	&lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='n'&gt;self&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;&lt;span class='n'&gt;httpClient&lt;/span&gt; &lt;span class='n'&gt;deletePath&lt;/span&gt;&lt;span class='o'&gt;:&lt;/span&gt;&lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='n'&gt;NSString&lt;/span&gt; &lt;span class='n'&gt;stringWithFormat&lt;/span&gt;&lt;span class='o'&gt;:&lt;/span&gt;&lt;span class='s'&gt;@&amp;quot;notes/%@&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='n'&gt;aNote&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;&lt;span class='n'&gt;noteID&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt; 
-	&lt;span class='n'&gt;parameters&lt;/span&gt;&lt;span class='o'&gt;:&lt;/span&gt;&lt;span class='nb'&gt;nil&lt;/span&gt; 
-	&lt;span class='n'&gt;success&lt;/span&gt;&lt;span class='o'&gt;:^&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;AFHTTPRequestOperation&lt;/span&gt; &lt;span class='o'&gt;*&lt;/span&gt;&lt;span class='n'&gt;operation&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='kt'&gt;id&lt;/span&gt; &lt;span class='n'&gt;responseObject&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt;
-    		&lt;span class='n'&gt;NSLog&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s'&gt;@&amp;quot;%@&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='n'&gt;responseObject&lt;/span&gt; &lt;span class='n'&gt;objectFromJSONData&lt;/span&gt;&lt;span class='p'&gt;]);&lt;/span&gt;
-    		&lt;span class='n'&gt;NSDictionary&lt;/span&gt; &lt;span class='o'&gt;*&lt;/span&gt;&lt;span class='n'&gt;dict&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='n'&gt;responseObject&lt;/span&gt; &lt;span class='n'&gt;objectFromJSONData&lt;/span&gt;&lt;span class='p'&gt;];&lt;/span&gt;
-    		&lt;span class='k'&gt;if&lt;/span&gt; &lt;span class='p'&gt;([&lt;/span&gt;&lt;span class='n'&gt;dict&lt;/span&gt;&lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='s'&gt;@&amp;quot;success&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt; &lt;span class='n'&gt;integerValue&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; &lt;span class='mi'&gt;1&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt;
-        		&lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='n'&gt;self&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;&lt;span class='n'&gt;dataArray&lt;/span&gt; &lt;span class='n'&gt;removeObjectAtIndex&lt;/span&gt;&lt;span class='o'&gt;:&lt;/span&gt;&lt;span class='n'&gt;self&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;&lt;span class='n'&gt;indexPathToBeDeleted&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;&lt;span class='n'&gt;row&lt;/span&gt;&lt;span class='p'&gt;];&lt;/span&gt;
-        		&lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='n'&gt;self&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;&lt;span class='n'&gt;tableView&lt;/span&gt; &lt;span class='n'&gt;deleteRowsAtIndexPaths&lt;/span&gt;&lt;span class='o'&gt;:&lt;/span&gt;&lt;span class='err'&gt;@&lt;/span&gt;&lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='n'&gt;self&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;&lt;span class='n'&gt;indexPathToBeDeleted&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt;
-        	&lt;span class='nl'&gt;withRowAnimation:&lt;/span&gt;&lt;span class='n'&gt;UITableViewRowAnimationFade&lt;/span&gt;&lt;span class='p'&gt;];&lt;/span&gt;
-    		&lt;span class='p'&gt;}&lt;/span&gt;
-		&lt;span class='p'&gt;}&lt;/span&gt; &lt;span class='n'&gt;failure&lt;/span&gt;&lt;span class='o'&gt;:^&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;AFHTTPRequestOperation&lt;/span&gt; &lt;span class='o'&gt;*&lt;/span&gt;&lt;span class='n'&gt;operation&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='n'&gt;NSError&lt;/span&gt; &lt;span class='o'&gt;*&lt;/span&gt;&lt;span class='n'&gt;error&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt;
-    			&lt;span class='n'&gt;NSLog&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s'&gt;@&amp;quot;Failed to delete a note, ERROR &amp;gt;&amp;gt; %@&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='n'&gt;error&lt;/span&gt;&lt;span class='p'&gt;);&lt;/span&gt;
-	&lt;span class='p'&gt;}];&lt;/span&gt;
-&lt;span class='p'&gt;}&lt;/span&gt;
+&lt;pre&gt;&lt;code&gt;[self.httpClient getPath:@&quot;notes&quot; parameters:nil
+ success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSArray *responseArray = [responseObject objectFromJSONData];
+        NSLog(@&quot;%@&quot;, responseArray);
 
+        NSMutableArray *mArr = [NSMutableArray array];
+        for (NSDictionary *attributes in responseArray) {
+            Note *note = [[Note alloc] initWithAttributes:attributes];
+            [mArr addObject:note];
+        }
+        self.dataArray = mArr;
+        [self.tableView reloadData];
 
-
-&lt;span class='k'&gt;-&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='kt'&gt;void&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;&lt;span class='nf'&gt;updateNote:&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;Note&lt;/span&gt; &lt;span class='o'&gt;*&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;&lt;span class='nv'&gt;aNote&lt;/span&gt;
-&lt;span class='p'&gt;{&lt;/span&gt;
-	&lt;span class='n'&gt;NSDictionary&lt;/span&gt; &lt;span class='o'&gt;*&lt;/span&gt;&lt;span class='n'&gt;parameters&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='err'&gt;@&lt;/span&gt;&lt;span class='p'&gt;{&lt;/span&gt;&lt;span class='s'&gt;@&amp;quot;title&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;:&lt;/span&gt; &lt;span class='n'&gt;aNote&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;&lt;span class='n'&gt;title&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;
-	 &lt;span class='s'&gt;@&amp;quot;content&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;:&lt;/span&gt; &lt;span class='n'&gt;aNote&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;&lt;span class='n'&gt;content&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; 
-	 &lt;span class='s'&gt;@&amp;quot;author&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;:&lt;/span&gt; &lt;span class='n'&gt;aNote&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;&lt;span class='n'&gt;author&lt;/span&gt;&lt;span class='p'&gt;};&lt;/span&gt;
-	&lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='n'&gt;self&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;&lt;span class='n'&gt;httpClient&lt;/span&gt; &lt;span class='n'&gt;putPath&lt;/span&gt;&lt;span class='o'&gt;:&lt;/span&gt;&lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='n'&gt;NSString&lt;/span&gt; &lt;span class='n'&gt;stringWithFormat&lt;/span&gt;&lt;span class='o'&gt;:&lt;/span&gt;&lt;span class='s'&gt;@&amp;quot;notes/%@&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;&lt;span class='n'&gt;aNote&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;&lt;span class='n'&gt;noteID&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt;
-	&lt;span class='nl'&gt;parameters:&lt;/span&gt;&lt;span class='n'&gt;parameters&lt;/span&gt; 
-	&lt;span class='n'&gt;success&lt;/span&gt;&lt;span class='o'&gt;:^&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;AFHTTPRequestOperation&lt;/span&gt; &lt;span class='o'&gt;*&lt;/span&gt;&lt;span class='n'&gt;operation&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='kt'&gt;id&lt;/span&gt; &lt;span class='n'&gt;responseObject&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt;
-    		&lt;span class='n'&gt;NSLog&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s'&gt;@&amp;quot;%@&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='n'&gt;responseObject&lt;/span&gt; &lt;span class='n'&gt;objectFromJSONData&lt;/span&gt;&lt;span class='p'&gt;]);&lt;/span&gt;
-    		&lt;span class='n'&gt;NSDictionary&lt;/span&gt; &lt;span class='o'&gt;*&lt;/span&gt;&lt;span class='n'&gt;dict&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='n'&gt;responseObject&lt;/span&gt; &lt;span class='n'&gt;objectFromJSONData&lt;/span&gt;&lt;span class='p'&gt;];&lt;/span&gt;
-    		&lt;span class='k'&gt;if&lt;/span&gt; &lt;span class='p'&gt;([&lt;/span&gt;&lt;span class='n'&gt;dict&lt;/span&gt;&lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='s'&gt;@&amp;quot;success&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt; &lt;span class='n'&gt;integerValue&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; &lt;span class='mi'&gt;1&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt;
-        		&lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='n'&gt;self&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;&lt;span class='n'&gt;navigationController&lt;/span&gt; &lt;span class='n'&gt;popViewControllerAnimated&lt;/span&gt;&lt;span class='o'&gt;:&lt;/span&gt;&lt;span class='nb'&gt;YES&lt;/span&gt;&lt;span class='p'&gt;];&lt;/span&gt;
-        		&lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;refreshList&lt;/span&gt;&lt;span class='p'&gt;];&lt;/span&gt;
-    		&lt;span class='p'&gt;}&lt;/span&gt;
-
-		&lt;span class='p'&gt;}&lt;/span&gt; &lt;span class='n'&gt;failure&lt;/span&gt;&lt;span class='o'&gt;:^&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;AFHTTPRequestOperation&lt;/span&gt; &lt;span class='o'&gt;*&lt;/span&gt;&lt;span class='n'&gt;operation&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='n'&gt;NSError&lt;/span&gt; &lt;span class='o'&gt;*&lt;/span&gt;&lt;span class='n'&gt;error&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt;
-    			&lt;span class='n'&gt;NSLog&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s'&gt;@&amp;quot;Failed to update a note, ERROR &amp;gt;&amp;gt; %@&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='n'&gt;error&lt;/span&gt;&lt;span class='p'&gt;);&lt;/span&gt;
-
-	&lt;span class='p'&gt;}];&lt;/span&gt;
-&lt;span class='p'&gt;}&lt;/span&gt;
-
-&lt;span class='k'&gt;-&lt;/span&gt; &lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='kt'&gt;void&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;&lt;span class='nf'&gt;createNote:&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;Note&lt;/span&gt; &lt;span class='o'&gt;*&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt;&lt;span class='nv'&gt;aNote&lt;/span&gt;
-&lt;span class='p'&gt;{&lt;/span&gt;
-	&lt;span class='n'&gt;NSDictionary&lt;/span&gt; &lt;span class='o'&gt;*&lt;/span&gt;&lt;span class='n'&gt;parameters&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='err'&gt;@&lt;/span&gt;&lt;span class='p'&gt;{&lt;/span&gt;&lt;span class='s'&gt;@&amp;quot;title&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;:&lt;/span&gt; &lt;span class='n'&gt;aNote&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;&lt;span class='n'&gt;title&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt;
-	 &lt;span class='s'&gt;@&amp;quot;content&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;:&lt;/span&gt; &lt;span class='n'&gt;aNote&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;&lt;span class='n'&gt;content&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; 
-	 &lt;span class='s'&gt;@&amp;quot;author&amp;quot;&lt;/span&gt;&lt;span class='o'&gt;:&lt;/span&gt; &lt;span class='n'&gt;aNote&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;&lt;span class='n'&gt;author&lt;/span&gt;&lt;span class='p'&gt;};&lt;/span&gt;
-
-	&lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='n'&gt;self&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;&lt;span class='n'&gt;httpClient&lt;/span&gt; &lt;span class='n'&gt;postPath&lt;/span&gt;&lt;span class='o'&gt;:&lt;/span&gt;&lt;span class='s'&gt;@&amp;quot;notes&amp;quot;&lt;/span&gt; 
-	&lt;span class='n'&gt;parameters&lt;/span&gt;&lt;span class='o'&gt;:&lt;/span&gt;&lt;span class='n'&gt;parameters&lt;/span&gt; 
-	&lt;span class='n'&gt;success&lt;/span&gt;&lt;span class='o'&gt;:^&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;AFHTTPRequestOperation&lt;/span&gt; &lt;span class='o'&gt;*&lt;/span&gt;&lt;span class='n'&gt;operation&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='kt'&gt;id&lt;/span&gt; &lt;span class='n'&gt;responseObject&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt;
-    		&lt;span class='n'&gt;NSLog&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s'&gt;@&amp;quot;%@&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='n'&gt;responseObject&lt;/span&gt; &lt;span class='n'&gt;objectFromJSONData&lt;/span&gt;&lt;span class='p'&gt;]);&lt;/span&gt;
-    		&lt;span class='n'&gt;NSDictionary&lt;/span&gt; &lt;span class='o'&gt;*&lt;/span&gt;&lt;span class='n'&gt;dict&lt;/span&gt; &lt;span class='o'&gt;=&lt;/span&gt; &lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='n'&gt;responseObject&lt;/span&gt; &lt;span class='n'&gt;objectFromJSONData&lt;/span&gt;&lt;span class='p'&gt;];&lt;/span&gt;
-    		&lt;span class='k'&gt;if&lt;/span&gt; &lt;span class='p'&gt;([&lt;/span&gt;&lt;span class='n'&gt;dict&lt;/span&gt;&lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='s'&gt;@&amp;quot;success&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt; &lt;span class='n'&gt;integerValue&lt;/span&gt;&lt;span class='p'&gt;]&lt;/span&gt; &lt;span class='o'&gt;==&lt;/span&gt; &lt;span class='mi'&gt;1&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt;
-        		&lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='n'&gt;self&lt;/span&gt;&lt;span class='p'&gt;.&lt;/span&gt;&lt;span class='n'&gt;navigationController&lt;/span&gt; &lt;span class='n'&gt;popViewControllerAnimated&lt;/span&gt;&lt;span class='o'&gt;:&lt;/span&gt;&lt;span class='nb'&gt;YES&lt;/span&gt;&lt;span class='p'&gt;];&lt;/span&gt;
-        		&lt;span class='p'&gt;[&lt;/span&gt;&lt;span class='n'&gt;self&lt;/span&gt; &lt;span class='n'&gt;refreshList&lt;/span&gt;&lt;span class='p'&gt;];&lt;/span&gt;
-    		&lt;span class='p'&gt;}&lt;/span&gt;
-		&lt;span class='p'&gt;}&lt;/span&gt; &lt;span class='n'&gt;failure&lt;/span&gt;&lt;span class='o'&gt;:^&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='n'&gt;AFHTTPRequestOperation&lt;/span&gt; &lt;span class='o'&gt;*&lt;/span&gt;&lt;span class='n'&gt;operation&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='n'&gt;NSError&lt;/span&gt; &lt;span class='o'&gt;*&lt;/span&gt;&lt;span class='n'&gt;error&lt;/span&gt;&lt;span class='p'&gt;)&lt;/span&gt; &lt;span class='p'&gt;{&lt;/span&gt;
-    			&lt;span class='n'&gt;NSLog&lt;/span&gt;&lt;span class='p'&gt;(&lt;/span&gt;&lt;span class='s'&gt;@&amp;quot;Failed to create a note, ERROR &amp;gt;&amp;gt; %@&amp;quot;&lt;/span&gt;&lt;span class='p'&gt;,&lt;/span&gt; &lt;span class='n'&gt;error&lt;/span&gt;&lt;span class='p'&gt;);&lt;/span&gt;
-	&lt;span class='p'&gt;}];&lt;/span&gt;
-&lt;span class='p'&gt;}&lt;/span&gt;
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@&quot;Failed to get note list, ERROR &amp;gt;&amp;gt; %@&quot;, error);
+}];
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;iOS 端的具体逻辑也大致是这样了，整个教程就分 server 端 和 iOS 端 2个简洁的教程，具体看托管在 &lt;a href='https://github.com/levey/WhateverNote'&gt;GitHub&lt;/a&gt; 上的代码。&lt;/p&gt;
+
+&lt;p&gt;}&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;(void)deleteNote:(Note &lt;em&gt;)aNote
+{
+  NSLog(@&quot;Delete a note with ID &gt;&gt; %@&quot;, aNote.noteID);
+  [self.httpClient deletePath:[NSString stringWithFormat:@&quot;notes/%@&quot;,aNote.noteID]
+  parameters:nil
+  success:^(AFHTTPRequestOperation &lt;/em&gt;operation, id responseObject) {
+          NSLog(@&quot;%@&quot;, [responseObject objectFromJSONData]);
+          NSDictionary &lt;em&gt;dict = [responseObject objectFromJSONData];
+          if ([dict[@&quot;success&quot;] integerValue] == 1) {
+              [self.dataArray removeObjectAtIndex:self.indexPathToBeDeleted.row];
+              [self.tableView deleteRowsAtIndexPaths:@[self.indexPathToBeDeleted]
+          withRowAnimation:UITableViewRowAnimationFade];
+          }
+      } failure:^(AFHTTPRequestOperation &lt;/em&gt;operation, NSError *error) {
+              NSLog(@&quot;Failed to delete a note, ERROR &gt;&gt; %@&quot;, error);
+  }];
+}&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;(void)updateNote:(Note &lt;em&gt;)aNote
+{
+  NSDictionary &lt;/em&gt;parameters = @{@&quot;title&quot;: aNote.title,
+   @&quot;content&quot;: aNote.content,
+   @&quot;author&quot;: aNote.author};
+  [self.httpClient putPath:[NSString stringWithFormat:@&quot;notes/%@&quot;,aNote.noteID]
+  parameters:parameters
+  success:^(AFHTTPRequestOperation &lt;em&gt;operation, id responseObject) {
+          NSLog(@&quot;%@&quot;, [responseObject objectFromJSONData]);
+          NSDictionary &lt;/em&gt;dict = [responseObject objectFromJSONData];
+          if ([dict[@&quot;success&quot;] integerValue] == 1) {
+              [self.navigationController popViewControllerAnimated:YES];
+              [self refreshList];
+          }&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+          NSLog(@&quot;Failed to update a note, ERROR &amp;gt;&amp;gt; %@&quot;, error);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;  }];
+}&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;(void)createNote:(Note &lt;em&gt;)aNote
+{
+  NSDictionary &lt;/em&gt;parameters = @{@&quot;title&quot;: aNote.title,
+   @&quot;content&quot;: aNote.content,
+   @&quot;author&quot;: aNote.author};&lt;/p&gt;
+
+&lt;p&gt;  [self.httpClient postPath:@&quot;notes&quot; parameters:parameters
+  success:^(AFHTTPRequestOperation &lt;em&gt;operation, id responseObject) {
+          NSLog(@&quot;%@&quot;, [responseObject objectFromJSONData]);
+          NSDictionary &lt;/em&gt;dict = [responseObject objectFromJSONData];
+          if ([dict[@&quot;success&quot;] integerValue] == 1) {
+              [self.navigationController popViewControllerAnimated:YES];
+              [self refreshList];
+          }
+      } failure:^(AFHTTPRequestOperation &lt;em&gt;operation, NSError &lt;/em&gt;error) {
+              NSLog(@&quot;Failed to create a note, ERROR &gt;&gt; %@&quot;, error);
+  }];
+}&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;iOS 端的具体逻辑也大致是这样了，整个教程就分 server 端 和 iOS 端 2个简洁的教程，具体看托管在 &lt;a href=&quot;https://github.com/levey/WhateverNote&quot;&gt;GitHub&lt;/a&gt; 上的代码。&lt;/p&gt;
 
 &lt;p&gt;实际项目往往复杂很多，引用居里夫人的话：&lt;/p&gt;
 
-&lt;blockquote&gt;
-&lt;p&gt;Life is not easy for any of us.&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;blockquote&gt;&lt;p&gt;Life is not easy for any of us.&lt;/p&gt;&lt;/blockquote&gt;
 
-&lt;p&gt;咖啡馆坐累了， 回家睡觉。&lt;/p&gt;</content>
+&lt;p&gt;咖啡馆坐累了， 回家睡觉。&lt;/p&gt;
+</content>
  </entry>
  
  <entry>
@@ -195,77 +208,94 @@
    <id>http://levey.github.com/blog/2012/12/20/delegate-vs-blcok-vs-notification-vs-kvo</id>
    <content type="html">&lt;p&gt;最近在工作中遇到对使用 Delegate 和 Notification 的争议，我写下了自己的观点。&lt;/p&gt;
 
-&lt;h4 id='delegate'&gt;Delegate&lt;/h4&gt;
+&lt;h4&gt;Delegate&lt;/h4&gt;
 
-&lt;h5 id='id2076'&gt;好处&lt;/h5&gt;
+&lt;hr /&gt;
 
-&lt;p&gt;语法严格，所有方法必须被定义。&lt;/p&gt;
+&lt;h5&gt;优点：&lt;/h5&gt;
 
-&lt;p&gt;编译期的检查，Warning 或者 Error。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;语法严格，所有方法必须被定义。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;编译期的检查，Warning 或者 Error。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;非常容易追踪，DEBUG 或者跳转到定义的时候很方便。&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
 
-&lt;p&gt;非常容易追踪，DEBUG 或者跳转到定义的时候很方便。&lt;/p&gt;
 
-&lt;h5 id='id2077'&gt;坏处&lt;/h5&gt;
+&lt;h5&gt;缺点：&lt;/h5&gt;
 
-&lt;p&gt;写的代码比较多。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;写的代码比较多。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;需要检查 delegate 是否为空指针。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;一对多实现困难。&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
 
-&lt;p&gt;需要检查 delegate 是否为空指针。&lt;/p&gt;
 
-&lt;p&gt;一对多实现困难。&lt;/p&gt;
+&lt;h4&gt;Block&lt;/h4&gt;
 
-&lt;h4 id='block'&gt;Block&lt;/h4&gt;
+&lt;h5&gt;优点：&lt;/h5&gt;
 
-&lt;h5 id='id2078'&gt;好处&lt;/h5&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;匿名方法，不需要额外定义方法。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;异步处理时的语法直观。&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
 
-&lt;p&gt;匿名方法，不需要额外定义方法。&lt;/p&gt;
 
-&lt;p&gt;异步处理时的语法直观。&lt;/p&gt;
+&lt;h5&gt;缺点：&lt;/h5&gt;
 
-&lt;h5 id='id2079'&gt;坏处&lt;/h5&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;使用 ARC 时需要小心 retain cycle.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;传入 block 的对象需要做处理。&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
 
-&lt;p&gt;需要小心 retain cycle.&lt;/p&gt;
 
-&lt;p&gt;传入 block 的对象需要做处理。&lt;/p&gt;
+&lt;h4&gt;Notification&lt;/h4&gt;
 
-&lt;h4 id='notification'&gt;Notification&lt;/h4&gt;
+&lt;hr /&gt;
 
-&lt;h5 id='id2080'&gt;好处&lt;/h5&gt;
+&lt;h5&gt;优点：&lt;/h5&gt;
 
-&lt;p&gt;实现简单。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;实现简单。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;更新多个对象。&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
 
-&lt;p&gt;更新多个对象。&lt;/p&gt;
 
-&lt;h5 id='id2081'&gt;坏处&lt;/h5&gt;
+&lt;h5&gt;缺点：&lt;/h5&gt;
 
-&lt;p&gt;没有编译时检查。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;没有编译时检查。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;在不需要的时候需要注销通知。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;不可追踪（DEBUG）。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;通知的名字需要在 controller 和 observer 都被知道,如果稍有写错,后果不堪,不好维护。&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
 
-&lt;p&gt;在不需要的时候需要注销通知。&lt;/p&gt;
 
-&lt;p&gt;不可追踪（DEBUG）。&lt;/p&gt;
+&lt;h4&gt;KVO&lt;/h4&gt;
 
-&lt;p&gt;通知的名字需要在 controller 和 observer 都被知道,如果稍有写错,后果不堪。&lt;/p&gt;
+&lt;hr /&gt;
 
-&lt;h4 id='kvo'&gt;KVO&lt;/h4&gt;
+&lt;h5&gt;优点：&lt;/h5&gt;
 
-&lt;h5 id='id2082'&gt;好处&lt;/h5&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;在2个对象间同步信息很方便。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;能提供一个对象的新的值和旧的值。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;可以 observe 嵌套的对象。&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
 
-&lt;p&gt;在2个对象间同步信息很方便。&lt;/p&gt;
 
-&lt;p&gt;能提供一个对象的新的值和旧的值。&lt;/p&gt;
+&lt;h5&gt;缺点：&lt;/h5&gt;
 
-&lt;p&gt;可以 observe 嵌套的对象。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;被监听的属性是需要用字符串来表示的，没有编译期间检查。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;属性的改动导致 observe 失效。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;在对象销毁的时候需要移除 observer。&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
 
-&lt;h5 id='id2083'&gt;坏处&lt;/h5&gt;
 
-&lt;p&gt;被监听的属性是需要用字符串来表示的，没有编译期间检查。&lt;/p&gt;
+&lt;h4&gt;总结&lt;/h4&gt;
 
-&lt;p&gt;属性的改动导致 observe 失效。&lt;/p&gt;
-
-&lt;p&gt;在对象销毁的时候需要移除 observer。&lt;/p&gt;
-
-&lt;h4 id='id2084'&gt;总结&lt;/h4&gt;
-
-&lt;p&gt;我个人比较倾向于使用 Delegate 和 Block 来在各对象之前交互（在有多个方法的时候我会使用Delegate）在少数需要更新多个对象的使用 Notification 和 KVO.&lt;/p&gt;</content>
+&lt;p&gt;我个人比较倾向于使用 Delegate 和 Block 来在各对象之前交互（在有多个方法的时候我会使用Delegate）在少数需要更新多个对象的使用 Notification  和 KVO.&lt;/p&gt;
+</content>
  </entry>
  
  <entry>
@@ -273,79 +303,88 @@
    <link href="http://levey.github.com/blog/2012/12/13/build-ios-app-with-nodejs-server-1.html"/>
    <updated>2012-12-13T00:00:00+08:00</updated>
    <id>http://levey.github.com/blog/2012/12/13/build-ios-app-with-nodejs-server-1</id>
-   <content type="html">&lt;h4 id='id2072'&gt;说明&lt;/h4&gt;
+   <content type="html">&lt;h4&gt;说明&lt;/h4&gt;
 
 &lt;p&gt;这是一篇很基础的教程，全篇通过制作一个叫 WhateverNote 的 app，来描述 iOS app 的前端和服务端交互的。&lt;/p&gt;
 
 &lt;p&gt;这份教程只是用于初学示例，可能有很多不严谨的地方（比如有些类型检查遗漏了），请多多包含 :)&lt;/p&gt;
 
-&lt;p&gt;代码托管在 &lt;a href='https://github.com/levey/WhateverNote'&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;代码托管在 &lt;a href=&quot;https://github.com/levey/WhateverNote&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
 
-&lt;h4 id='__'&gt;语言 / 框架&lt;/h4&gt;
+&lt;h4&gt;语言 / 框架&lt;/h4&gt;
 
-&lt;p&gt;iOS 端用到的语言就是 Objective-C, 为了方便我选择 &lt;a href='https://github.com/AFNetworking/AFNetworking'&gt;AFNetowrking&lt;/a&gt; 作为 HTTP 库 。服务器端本来想用 Ruby on Rails 或者 Sinatra 的，但是后来想试一试 Node.js 的体验，所以就用 Node.js了，选择的 web framework 是 express.js, 跟 Sinatra 是类似的，都比较轻量级。&lt;/p&gt;
+&lt;p&gt;iOS 端用到的语言就是 Objective-C, 为了方便我选择 &lt;a href=&quot;https://github.com/AFNetworking/AFNetworking&quot;&gt;AFNetowrking&lt;/a&gt; 作为 HTTP 库 。服务器端本来想用 Ruby on Rails  或者 Sinatra 的，但是后来想试一试 Node.js 的体验，所以就用 Node.js了，选择的 web framework 是 express.js, 跟 Sinatra 是类似的，都比较轻量级。&lt;/p&gt;
 
-&lt;h4 id='id2073'&gt;工具&lt;/h4&gt;
+&lt;h4&gt;工具&lt;/h4&gt;
 
-&lt;p&gt;iOS: &lt;code&gt;Xcode&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;iOS:  &lt;code&gt;Xcode&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;Node.js: &lt;code&gt;Sublime Text 2&lt;/code&gt; / &lt;code&gt; iTerm 2&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Node.js: &lt;code&gt;Sublime Text 2&lt;/code&gt; / &lt;code&gt;iTerm 2&lt;/code&gt;&lt;/p&gt;
+
 &lt;hr /&gt;
-&lt;h4 id='whatevernote__server'&gt;WhateverNote - Server&lt;/h4&gt;
 
-&lt;p&gt;先从 &lt;a href='http://nodejs.org'&gt;http://nodejs.org&lt;/a&gt; 下载安装 Node.js，我当前的最新稳定版本为 v0.8.15。&lt;/p&gt;
+&lt;h4&gt;WhateverNote - Server&lt;/h4&gt;
+
+&lt;p&gt;先从 &lt;a href=&quot;http://nodejs.org&quot;&gt;http://nodejs.org&lt;/a&gt; 下载安装 Node.js，我当前的最新稳定版本为 v0.8.15。&lt;/p&gt;
 
 &lt;p&gt;安装 Node.js 成功后，通过终端安装 express.js, -g 参数表示安装的包为全局的。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;npm install -g express&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;npm install -g express
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;安装 express.js 成功后， 在 WhateverNote 目录下新建一个 Whatever-server 的项目&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;express Whatever-server&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;express Whatever-server
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;进入刚建立的项目的目录 执行&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;node app.js &lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;node app.js 
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;然后用浏览器打开 localhost:3000 就能看到 express 的欢迎页面了。&lt;/p&gt;
 
 &lt;p&gt;然后我们看一下 app.js 这个文件，&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;var express = require(&amp;#39;express&amp;#39;)
- , routes = require(&amp;#39;./routes&amp;#39;)
- , user = require(&amp;#39;./routes/user&amp;#39;)
- , http = require(&amp;#39;http&amp;#39;)
- , path = require(&amp;#39;path&amp;#39;);
+&lt;pre&gt;&lt;code&gt;var express = require('express')
+ , routes = require('./routes')
+ , user = require('./routes/user')
+ , http = require('http')
+ , path = require('path');
 
-var app = express();&lt;/code&gt;&lt;/pre&gt;
+var app = express();
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;这些是一些变量，express 是以文件目录的形式来定义类型的。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;app.configure(function(){
-  app.set(&amp;#39;port&amp;#39;, process.env.PORT || 3000);
-  app.set(&amp;#39;views&amp;#39;, __dirname + &amp;#39;/views&amp;#39;);
-  app.set(&amp;#39;view engine&amp;#39;, &amp;#39;jade&amp;#39;);
+  app.set('port', process.env.PORT || 3000);
+  app.set('views', __dirname + '/views');
+  app.set('view engine', 'jade');
   app.use(express.favicon());
-  app.use(express.logger(&amp;#39;dev&amp;#39;));
+  app.use(express.logger('dev'));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(app.router);
-  app.use(express.static(path.join(__dirname, &amp;#39;public&amp;#39;)));
-});&lt;/code&gt;&lt;/pre&gt;
+  app.use(express.static(path.join(__dirname, 'public')));
+});
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;这些是对 express 的配置。&lt;/p&gt;
 
 &lt;p&gt;接下来&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;app.get(&amp;#39;/&amp;#39;, routes.index);&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;app.get('/', routes.index);
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;这一行就是对刚才访问到的主页的处理。&lt;/p&gt;
 
 &lt;p&gt;最后&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;http.createServer(app).listen(app.get(&amp;#39;port&amp;#39;), function(){
-  console.log(&amp;quot;Express server listening on port &amp;quot; + app.get(&amp;#39;port&amp;#39;));
-});&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;http.createServer(app).listen(app.get('port'), function(){
+  console.log(&quot;Express server listening on port &quot; + app.get('port'));
+});
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;就是服务器的创建，因为 Node.js 运行环境本身可以作为 web server，所以不用 apache/nginx 等类似的 web server.&lt;/p&gt;
 
@@ -358,62 +397,68 @@ var app = express();&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;在 &lt;strong&gt;controllers/note.js&lt;/strong&gt; 写上如下代码&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;exports.index = function (req, res) {
-  res.send(&amp;#39;hello world&amp;#39;);
-};&lt;/code&gt;&lt;/pre&gt;
+  res.send('hello world');
+};
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;然后在 &lt;strong&gt;routes.js&lt;/strong&gt; 写下如下代码&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;var note = require(&amp;#39;./controllers/note&amp;#39;)
+&lt;pre&gt;&lt;code&gt;var note = require('./controllers/note')
 
 exports.route = function (app) {
-  app.get(&amp;#39;/&amp;#39;, function(req, res) {
-    res.send(&amp;#39;hello world&amp;#39;);
+  app.get('/', function(req, res) {
+    res.send('hello world');
   });
-};&lt;/code&gt;&lt;/pre&gt;
+};
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;最后在 &lt;strong&gt;app.js&lt;/strong&gt; 中 把那些 express 的默认建立的 user 变量删除，然后用以下代码替换原来的路由代码。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;routes.route(app);
-// app.get(&amp;#39;/&amp;#39;, routes.index);&lt;/code&gt;&lt;/pre&gt;
+// app.get('/', routes.index);
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;然后重新启动 Server (node app.js)，我们就可以看到主页只输出 hello world 字符串。&lt;/p&gt;
 
-&lt;h5 id='model'&gt;创建Model&lt;/h5&gt;
+&lt;h5&gt;创建Model&lt;/h5&gt;
 
 &lt;p&gt;mongoose 这个库管理 MongoDB 听方便的，在 &lt;strong&gt;/models/note.js&lt;/strong&gt; 里写下如下代码&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;var mongoose = require(&amp;#39;mongoose&amp;#39;);
-var db = mongoose.createConnection(&amp;#39;mongodb://localhost/notes&amp;#39;)
+&lt;pre&gt;&lt;code&gt;var mongoose = require('mongoose');
+var db = mongoose.createConnection('mongodb://localhost/notes')
 var NoteSchema = mongoose.Schema({
   title: String,
   content: String,
   author: String
 });
 
-exports.Note = db.model(&amp;#39;Note&amp;#39;,NoteSchema);&lt;/code&gt;&lt;/pre&gt;
+exports.Note = db.model('Note',NoteSchema);
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;然后我们在 &lt;strong&gt;/controllers/note.js&lt;/strong&gt; 里用一句&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;var Note = require(&amp;#39;../models/note&amp;#39;).Note;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;var Note = require('../models/note').Note;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;来引入 Note 这个 model，之后在这个 controller 里就能新建 Note 对象了。&lt;/p&gt;
 
-&lt;h5 id='id2074'&gt;创建路由&lt;/h5&gt;
+&lt;h5&gt;创建路由&lt;/h5&gt;
 
 &lt;p&gt;在 &lt;strong&gt;routes.js&lt;/strong&gt; 里追加如下 API&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;var note = require(&amp;#39;./controllers/note&amp;#39;)
+&lt;pre&gt;&lt;code&gt;var note = require('./controllers/note')
 
 exports.route = function (app) {
-  app.get(&amp;#39;/&amp;#39;, function(req, res) {
-    res.send(&amp;#39;hello world&amp;#39;);
+  app.get('/', function(req, res) {
+    res.send('hello world');
   });
-  app.get(&amp;#39;/notes&amp;#39;, note.index);
-  app.get(&amp;#39;/notes/:id&amp;#39;, note.show);
-  app.post(&amp;#39;/notes&amp;#39;, note.create);
-  app.put(&amp;#39;/notes/:id&amp;#39;,note.update);
-  app.delete(&amp;#39;/notes/:id&amp;#39;, note.destroy);
-};&lt;/code&gt;&lt;/pre&gt;
+  app.get('/notes', note.index);
+  app.get('/notes/:id', note.show);
+  app.post('/notes', note.create);
+  app.put('/notes/:id',note.update);
+  app.delete('/notes/:id', note.destroy);
+};
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;第一个就是获取 note 列表。&lt;/p&gt;
 
@@ -423,19 +468,19 @@ exports.route = function (app) {
 
 &lt;p&gt;第四个是删除一个对应 id 的 note.&lt;/p&gt;
 
-&lt;h5 id='_controller'&gt;最后一步，完善 Controller&lt;/h5&gt;
+&lt;h5&gt;最后一步，完善 Controller&lt;/h5&gt;
 
 &lt;p&gt;在之前一步我们看到了 每个 API 都调用了 controller 里的相应方法, 打开 &lt;strong&gt;./controllers/note&lt;/strong&gt; 输入如下代码&lt;/p&gt;
 
-&lt;p&gt;var Note = require(&amp;#8216;../models/note&amp;#8217;).Note;&lt;/p&gt;
+&lt;p&gt;var Note = require('../models/note').Note;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;exports.index = function(req, res) {
   Note.find(function(err, notes) {
-	if (!err) {
-		res.send(notes);
-	} else {
-		res.send(err);
-	}
+    if (!err) {
+        res.send(notes);
+    } else {
+        res.send(err);
+    }
   });
 }
 
@@ -444,7 +489,7 @@ exports.show = function(req, res) {
     if (!err) {
       res.send({success: 1, note: note});
     } else {
-	  res.send({success: 0});
+      res.send({success: 0});
     }
   });
 }
@@ -456,19 +501,19 @@ exports.create = function(req, res) {
   note.author = req.body.author;
   console.log(note);
   note.save(function(err){
-	if (!err) {
-		res.send({success: 1});
-	} else {
-		res.send({success: 0});
-	}
+    if (!err) {
+        res.send({success: 1});
+    } else {
+        res.send({success: 0});
+    }
   });
 }
 
 exports.update = function(req, res) {
   var update = {
-	title: req.param(&amp;#39;title&amp;#39;), 
-	content: req.param(&amp;#39;content&amp;#39;), 
-	author: req.param(&amp;#39;author&amp;#39;)
+    title: req.param('title'), 
+    content: req.param('content'), 
+    author: req.param('author')
   };
   Note.findByIdAndUpdate(req.params.id, update, function(err) {
     if (err) {
@@ -481,34 +526,36 @@ exports.update = function(req, res) {
 
 exports.destroy = function(req, res) {
   if (!req.params.id) {
-	res.send({success: 0, error: &amp;quot;Need &amp;lt;id&amp;gt; parameter.&amp;quot;});
+    res.send({success: 0, error: &quot;Need &amp;lt;id&amp;gt; parameter.&quot;});
   } else {
-	Note.findById(req.params.id, function (err, note) {
+    Note.findById(req.params.id, function (err, note) {
       if (!err) {
-    	if (note) {
-    	  note.remove(function(err) {
-      		if (!err) {
-      			res.send({success: 1});
-      		} else {
-      			res.send({success: 0, error: &amp;quot;Failed to delete.&amp;quot;});
-      		}
-      	  });
-    	} else {
-    		res.send({success: 0, error: &amp;quot;Can not find note.&amp;quot;});
-    	}
+        if (note) {
+          note.remove(function(err) {
+            if (!err) {
+                res.send({success: 1});
+            } else {
+                res.send({success: 0, error: &quot;Failed to delete.&quot;});
+            }
+          });
+        } else {
+            res.send({success: 0, error: &quot;Can not find note.&quot;});
+        }
       } else {
-    	res.send({success: 0, error: &amp;quot;Failed to delete.&amp;quot;});
+        res.send({success: 0, error: &quot;Failed to delete.&quot;});
       }
     });
   }
-}&lt;/code&gt;&lt;/pre&gt;
+}
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;h5 id='id2075'&gt;测试&lt;/h5&gt;
+&lt;h5&gt;测试&lt;/h5&gt;
 
 &lt;p&gt;由于我们使用了 MongoDB 作为数据库，我们需要先安装，使用 Homebrew 安装很方便，终端执行&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;brew update
-brew install mongodb&lt;/code&gt;&lt;/pre&gt;
+brew install mongodb
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;安装好后，在终端执行 &lt;strong&gt;mongod&lt;/strong&gt; 就可以开启数据库服务了。&lt;/p&gt;
 
@@ -516,21 +563,23 @@ brew install mongodb&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;最后，可以写个脚本试一下创建一个 note, Ruby 代码如下&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;require &amp;#39;net/http&amp;#39;
-response = Net::HTTP.post_form(URI.parse(&amp;#39;http://localhost:3000/notes&amp;#39;), 
-                           {title: &amp;#39;hello world&amp;#39;,
-                           	content: &amp;#39;hello big world&amp;#39;,
-                           	author: &amp;#39;levey&amp;#39;})
+&lt;pre&gt;&lt;code&gt;require 'net/http'
+response = Net::HTTP.post_form(URI.parse('http://localhost:3000/notes'), 
+                           {title: 'hello world',
+                            content: 'hello big world',
+                            author: 'levey'})
 
-puts response.body&lt;/code&gt;&lt;/pre&gt;
+puts response.body
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;如果输出 { &amp;#8220;success&amp;#8221;: 1 } ， 说明创建成功。&lt;/p&gt;
+&lt;p&gt;如果输出 { &quot;success&quot;: 1 } ， 说明创建成功。&lt;/p&gt;
 
-&lt;h5 id='__'&gt;歇会儿 &amp;amp; 接下来&lt;/h5&gt;
+&lt;h5&gt;歇会儿 &amp;amp; 接下来&lt;/h5&gt;
 
 &lt;p&gt;至此，WhateverNote 的 Server 端的这几个 API 完成了，接下来的第二篇将是 iOS 客户端与刚写好的 Server 端的交互的教程。&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Have a nice day.&lt;/strong&gt;&lt;/p&gt;</content>
+&lt;p&gt;&lt;strong&gt;Have a nice day.&lt;/strong&gt;&lt;/p&gt;
+</content>
  </entry>
  
  <entry>
@@ -540,64 +589,72 @@ puts response.body&lt;/code&gt;&lt;/pre&gt;
    <id>http://levey.github.com/blog/2012/11/06/migrate-postgresql-data-from-linode-to-heroku</id>
    <content type="html">&lt;p&gt;这篇博客意在帮助有想从 Linode 迁移网站到 Heroku 的读者.&lt;/p&gt;
 
-&lt;p&gt;一星期前，我的网站 &lt;a href='http://coderxcoder.com'&gt;coderxcoder&lt;/a&gt; 想从 Linode 迁移到 Heroku, 本来像尝试 使 用 ruby 的 taps 这个 gem 来迁移，但是无奈失败多次，最后使用此篇博客中的方法。&lt;/p&gt;
+&lt;p&gt;一星期前，我的网站 &lt;a href=&quot;http://coderxcoder.com&quot;&gt;coderxcoder&lt;/a&gt; 想从 Linode 迁移到 Heroku, 本来像尝试 使
+用 ruby 的 taps 这个 gem 来迁移，但是无奈失败多次，最后使用此篇博客中的方法。&lt;/p&gt;
 
 &lt;p&gt;本篇使用到的手段有:&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;使用 &lt;a href='http://www.postgresql.org/docs/7.3/static/app-pgdump.html'&gt;pg_dump&lt;/a&gt; 备份 PostgreSQL 数据。&lt;/li&gt;
-
+&lt;li&gt;使用 &lt;a href=&quot;http://www.postgresql.org/docs/7.3/static/app-pgdump.html&quot;&gt;pg_dump&lt;/a&gt; 备份 PostgreSQL 数据。&lt;/li&gt;
 &lt;li&gt;Nginx 公开备份好的文件。&lt;/li&gt;
-
-&lt;li&gt;使用 &lt;a href='https://devcenter.heroku.com/articles/pgbackups'&gt;pgbackups&lt;/a&gt; 这个 Heroku 的插件来导入并更新数据库。&lt;/li&gt;
+&lt;li&gt;使用 &lt;a href=&quot;https://devcenter.heroku.com/articles/pgbackups&quot;&gt;pgbackups&lt;/a&gt; 这个 Heroku 的插件来导入并更新数据库。&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h5 id='1'&gt;1.备份数据库&lt;/h5&gt;
+
+&lt;h5&gt;1.备份数据库&lt;/h5&gt;
 
 &lt;p&gt;首先 SSH 连接到 Linode 服务器, 输入命令&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;PGPASSWORD=[您的PG密码] pg_dump -Fc --no-acl --no-owner -h 127.0.0.1 -U [您的PG用户名] 
-[需要导出的数据库名] &amp;gt; mydb.dump&lt;/code&gt;&lt;/pre&gt;
+[需要导出的数据库名] &amp;gt; mydb.dump
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;导出的 mydb.dump 就是 之后需要用到的备份文件。&lt;/p&gt;
+&lt;p&gt;导出的 mydb.dump 就是  之后需要用到的备份文件。&lt;/p&gt;
 
-&lt;h5 id='2_nginx_'&gt;2. Nginx 公开数据库备份文件&lt;/h5&gt;
+&lt;h5&gt;2. Nginx 公开数据库备份文件&lt;/h5&gt;
 
 &lt;p&gt;首先， 在 /var/www 里新建一个 dbbackup 的目录下&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;sudo mkdir /var/www/dbbackup&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;sudo mkdir /var/www/dbbackup
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;然后， 在 /etc/nginx/sites-available 目录下 新建一个 dbbackup.conf 的文件&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;sudo touch /etc/nginx/sites-available/dbbackup.conf&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;sudo touch /etc/nginx/sites-available/dbbackup.conf
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;再然后， 在 dbbackup.conf 里输入以下配置&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;server
 {
-	server_name [你的服务器的域名或者IP];
-	listen 7000;
-	access_log off;
-	root /var/www/dbbackup;
+    server_name [你的服务器的域名或者IP];
+    listen 7000;
+    access_log off;
+    root /var/www/dbbackup;
 
-	location  /  {
-    	autoindex  on;
-	}
-}&lt;/code&gt;&lt;/pre&gt;
+    location  /  {
+        autoindex  on;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;再然后，链接到 sites-enabled 目录&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;ln -s /etc/nginx/sites-available/dbbackup.conf /etc/nginx/sites-enabled/dbbackup.conf&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;ln -s /etc/nginx/sites-available/dbbackup.conf /etc/nginx/sites-enabled/dbbackup.conf
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;再然后，重启 nginx&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;sudo /etc/init.d/ngnix restart&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;sudo /etc/init.d/ngnix restart
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;h5 id='3_'&gt;3. 恢复数据库&lt;/h5&gt;
+&lt;h5&gt;3. 恢复数据库&lt;/h5&gt;
 
-&lt;p&gt;这个很简单，按照 Heroku 的教程就好了，在你的项目目录里&lt;/p&gt;
+&lt;p&gt; 这个很简单，按照 Heroku 的教程就好了，在你的项目目录里&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;heroku pgbackups:restore [数据库名] [第二步公开的数据库备份文件地址]&lt;/code&gt;&lt;/pre&gt;</content>
+&lt;pre&gt;&lt;code&gt;heroku pgbackups:restore [数据库名] [第二步公开的数据库备份文件地址]
+&lt;/code&gt;&lt;/pre&gt;
+</content>
  </entry>
  
  

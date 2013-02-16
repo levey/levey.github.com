@@ -70,32 +70,34 @@ td { vertical-align: top; }
    Author: Christopher Ryan
    ========================================================================== */
 
-@font-face {
-    font-family: 'MyriadProLightBold';
+/*@font-face {
+    font-family: ''Andale Mono', 'Andale Mono', monospace;';
     src: url('../fonts/myriadpro-semibold-webfont.eot');
     src: url('../fonts/myriadpro-semibold-webfont.eot?#iefix') format('embedded-opentype'),
          url('../fonts/myriadpro-semibold-webfont.woff') format('woff'),
          url('../fonts/myriadpro-semibold-webfont.ttf') format('truetype'),
-         url('../fonts/myriadpro-semibold-webfont.svg#MyriadProLightBold') format('svg');
+         url('../fonts/myriadpro-semibold-webfont.svg#'Andale Mono', 'Andale Mono', monospace;') format('svg');
     font-weight: normal;
     font-style: normal;
 
 }
 
 @font-face {
-    font-family: 'MyriadProRegular';
+    font-family: ''Andale Mono', 'Andale Mono', monospace;';
     src: url('../fonts/myriad-webfont.eot');
     src: url('../fonts/myriad-webfont.eot?#iefix') format('embedded-opentype'),
          url('../fonts/myriad-webfont.woff') format('woff'),
          url('../fonts/myriad-webfont.ttf') format('truetype'),
-         url('../fonts/myriad-webfont.svg#MyriadProRegular') format('svg');
+         url('../fonts/myriad-webfont.svg#'Andale Mono', 'Andale Mono', monospace;') format('svg');
     font-weight: normal;
     font-style: normal;
 
 }
+*/
+
 h1
 {
-    font-family:MyriadProLightBold;
+    font-family: "Helvetica Neue", "Helvetica", sans-serif;
     font-size:2em;
     font-weight:400;
     margin:0;
@@ -108,7 +110,7 @@ p, h3, h4, code {
 p, h3, h4
 {
     color:#6c6c6c;
-    font-family:MyriadProRegular;
+    font-family: "Helvetica Neue", "Helvetica", sans-serif;
     font-weight:400;
     margin:-10px 0 0;
 }
@@ -145,7 +147,7 @@ html
 
 body
 {
-    font-family:MyriadProRegular;
+    font-family: "Helvetica Neue", "Helvetica", sans-serif;
 }
 
 header
@@ -165,7 +167,7 @@ ul.navigation li
 {
     border-bottom:2px solid #FFF;
     float:left;
-    font-family:MyriadProLightBold;
+    font-family: "Helvetica Neue", "Helvetica", sans-serif;
     font-size:1.2em;
     margin-left:60px;
 }
@@ -189,7 +191,7 @@ ul.posts li {
 }
 
 ul.posts span {
-  font-family: 'Lucida Console', 'Andale Mono', monospace;
+  font-family: 'Andale Mono', 'Andale Mono', monospace;
   color: #aaa;
   padding-right: 5px;
   font-size:14px;
@@ -212,12 +214,12 @@ ul.posts span {
     text-align:center;
 }
 
-
+/*
 .main p.hello
 {
     font-size:5em;
 }
-
+*/
 
 .secondary
 {
@@ -250,7 +252,7 @@ ul.posts span {
 footer
 {
     color:#a3a3a3;
-    font-family:MyriadProRegular;
+    font-family: "Helvetica Neue", "Helvetica", sans-serif;
     font-size:.8em;
     margin:20px auto;
 }
@@ -301,7 +303,7 @@ footer
 }
 
 .main .content h3 {
-    font-family: MyriadProLightBold;
+    font-family: font-family: "Helvetica Neue", "Helvetica", sans-serif;
     font-size: 3em;
     font-weight: 400;
     margin: 0;
@@ -319,7 +321,7 @@ footer
     width:241px;
     color:#58595b;
     filter:dropshadow(color=#ffffff,offx=0,offy=1);
-    font-family:MyriadProLightBold;
+    font-family: "Helvetica Neue", "Helvetica", sans-serif;
     font-size:1.2em;
     padding:auto!important;
     padding-top:15px;

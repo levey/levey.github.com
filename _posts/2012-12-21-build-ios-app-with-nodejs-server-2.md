@@ -5,7 +5,6 @@ description: ""
 category: blog
 tags: ["iOS", "Node.js"]
 ---
-{% include JB/setup %}
 
 
 ####  说明
@@ -46,7 +45,7 @@ Node.js: `Sublime Text 2` / ` iTerm 2`
 
 **Note.h**
 
-
+{% highlight objc %}
 
 @interface Note : NSObject
 
@@ -60,9 +59,12 @@ Node.js: `Sublime Text 2` / ` iTerm 2`
 @end
 
 
+{% endhighlight %}
+
 
 **Note.m**
 
+{% highlight objc %}
 
 #import "Note.h"
 
@@ -83,6 +85,8 @@ Node.js: `Sublime Text 2` / ` iTerm 2`
 
 @end
 
+{% endhighlight %}
+
 	
 接下来在 Note List 页面，我们会把从 server 端获取的 json 数据 解析成一个都是 Note 对象的列表。
 
@@ -101,6 +105,7 @@ NoteViewConrller 功能是新增、查看、更新单个 Note 的信息 (通过�
 
 **NoteListViewController.m**
 
+{% highlight objc %}
 
 -(void)refreshList
 {    
@@ -182,7 +187,8 @@ NoteViewConrller 功能是新增、查看、更新单个 Note 的信息 (通过�
 	}];
 }
 
-	
+
+{% endhighlight %}
 
 iOS 端的具体逻辑也大致是这样了，整个教程就分 server 端 和 iOS 端 2个简洁的教程，具体看托管在 [GitHub](https://github.com/levey/WhateverNote) 上的代码。
 

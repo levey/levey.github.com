@@ -27,8 +27,6 @@
 
  <p class="signature"></p>
 <div id="post">
-<p>Liquid error: No such file or directory - /Users/levey/Dev/Github/levey.github.com/_includes</p>
-
 <h4>说明</h4>
 
 <p>这是一篇很基础的教程，全篇通过制作一个叫 WhateverNote 的 app，来描述 iOS app 的前端和服务端交互的。</p>
@@ -65,43 +63,43 @@
 
 <p><strong>Note.h</strong></p>
 
-<p>@interface Note : NSObject</p>
+<div class="highlight"><pre><code class="objc"><span class="k">@interface</span> <span class="nc">Note</span> : <span class="nc">NSObject</span>
 
-<p>@property (nonatomic, strong) NSString <em>noteID;
-@property (nonatomic, strong) NSString </em>title;
-@property (nonatomic, strong) NSString <em>content;
-@property (nonatomic, strong) NSString </em>author;</p>
+<span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">strong</span><span class="p">)</span> <span class="n">NSString</span> <span class="o">*</span><span class="n">noteID</span><span class="p">;</span>
+<span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">strong</span><span class="p">)</span> <span class="n">NSString</span> <span class="o">*</span><span class="n">title</span><span class="p">;</span>
+<span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">strong</span><span class="p">)</span> <span class="n">NSString</span> <span class="o">*</span><span class="n">content</span><span class="p">;</span>
+<span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">strong</span><span class="p">)</span> <span class="n">NSString</span> <span class="o">*</span><span class="n">author</span><span class="p">;</span>
 
-<ul>
-<li>(id)initWithAttributes:(NSDictionary *)attributes;</li>
-</ul>
+<span class="k">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">initWithAttributes:</span><span class="p">(</span><span class="n">NSDictionary</span> <span class="o">*</span><span class="p">)</span><span class="nv">attributes</span><span class="p">;</span>
 
+<span class="k">@end</span>
+</code></pre>
+</div>
 
-<p>@end</p>
 
 <p><strong>Note.m</strong></p>
 
-<h1>import "Note.h"</h1>
+<div class="highlight"><pre><code class="objc"><span class="cp">#import &quot;Note.h&quot;</span>
 
-<p>@implementation Note</p>
+<span class="k">@implementation</span> <span class="nc">Note</span>
 
-<ul>
-<li><p>(id)initWithAttributes:(NSDictionary *)attributes
-{
-  self = [super init];
-  if (self) {
-      <em>noteID = [attributes valueForKeyPath:@"</em>id"];
-      <em>title = [attributes valueForKeyPath:@"title"];
-      </em>content = [attributes valueForKeyPath:@"content"];
-      _author = [attributes valueForKeyPath:@"author"];
-  }</p>
+<span class="k">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">initWithAttributes:</span><span class="p">(</span><span class="n">NSDictionary</span> <span class="o">*</span><span class="p">)</span><span class="nv">attributes</span>
+<span class="p">{</span>
+    <span class="n">self</span> <span class="o">=</span> <span class="p">[</span><span class="n">super</span> <span class="n">init</span><span class="p">];</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">_noteID</span> <span class="o">=</span> <span class="p">[</span><span class="n">attributes</span> <span class="n">valueForKeyPath</span><span class="o">:</span><span class="s">@&quot;_id&quot;</span><span class="p">];</span>
+        <span class="n">_title</span> <span class="o">=</span> <span class="p">[</span><span class="n">attributes</span> <span class="n">valueForKeyPath</span><span class="o">:</span><span class="s">@&quot;title&quot;</span><span class="p">];</span>
+        <span class="n">_content</span> <span class="o">=</span> <span class="p">[</span><span class="n">attributes</span> <span class="n">valueForKeyPath</span><span class="o">:</span><span class="s">@&quot;content&quot;</span><span class="p">];</span>
+        <span class="n">_author</span> <span class="o">=</span> <span class="p">[</span><span class="n">attributes</span> <span class="n">valueForKeyPath</span><span class="o">:</span><span class="s">@&quot;author&quot;</span><span class="p">];</span>
+    <span class="p">}</span>
 
-<p>  return self;
-}</p></li>
-</ul>
+    <span class="k">return</span> <span class="n">self</span><span class="p">;</span>
+<span class="p">}</span>
 
+<span class="k">@end</span>
+</code></pre>
+</div>
 
-<p>@end</p>
 
 <p>接下来在 Note List 页面，我们会把从 server 端获取的 json 数据 解析成一个都是 Note 对象的列表。</p>
 
@@ -118,87 +116,87 @@ NoteViewConrller 功能是新增、查看、更新单个 Note 的信息 (通过�
 
 <p><strong>NoteListViewController.m</strong></p>
 
-<p>-(void)refreshList
-{</p>
+<div class="highlight"><pre><code class="objc"><span class="k">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">refreshList</span>
+<span class="p">{</span>    
+    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">httpClient</span> <span class="n">getPath</span><span class="o">:</span><span class="s">@&quot;notes&quot;</span> <span class="n">parameters</span><span class="o">:</span><span class="nb">nil</span>
+     <span class="nl">success:</span><span class="o">^</span><span class="p">(</span><span class="n">AFHTTPRequestOperation</span> <span class="o">*</span><span class="n">operation</span><span class="p">,</span> <span class="kt">id</span> <span class="n">responseObject</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">NSArray</span> <span class="o">*</span><span class="n">responseArray</span> <span class="o">=</span> <span class="p">[</span><span class="n">responseObject</span> <span class="n">objectFromJSONData</span><span class="p">];</span>
+            <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span> <span class="n">responseArray</span><span class="p">);</span>
+    
+            <span class="n">NSMutableArray</span> <span class="o">*</span><span class="n">mArr</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSMutableArray</span> <span class="n">array</span><span class="p">];</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">NSDictionary</span> <span class="o">*</span><span class="n">attributes</span> <span class="k">in</span> <span class="n">responseArray</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">Note</span> <span class="o">*</span><span class="n">note</span> <span class="o">=</span> <span class="p">[[</span><span class="n">Note</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">initWithAttributes</span><span class="o">:</span><span class="n">attributes</span><span class="p">];</span>
+                <span class="p">[</span><span class="n">mArr</span> <span class="n">addObject</span><span class="o">:</span><span class="n">note</span><span class="p">];</span>
+            <span class="p">}</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">dataArray</span> <span class="o">=</span> <span class="n">mArr</span><span class="p">;</span>
+            <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">tableView</span> <span class="n">reloadData</span><span class="p">];</span>
 
-<pre><code>[self.httpClient getPath:@"notes" parameters:nil
- success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSArray *responseArray = [responseObject objectFromJSONData];
-        NSLog(@"%@", responseArray);
+        <span class="p">}</span> <span class="n">failure</span><span class="o">:^</span><span class="p">(</span><span class="n">AFHTTPRequestOperation</span> <span class="o">*</span><span class="n">operation</span><span class="p">,</span> <span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Failed to get note list, ERROR &gt;&gt; %@&quot;</span><span class="p">,</span> <span class="n">error</span><span class="p">);</span>
+    <span class="p">}];</span>
+<span class="p">}</span>
 
-        NSMutableArray *mArr = [NSMutableArray array];
-        for (NSDictionary *attributes in responseArray) {
-            Note *note = [[Note alloc] initWithAttributes:attributes];
-            [mArr addObject:note];
-        }
-        self.dataArray = mArr;
-        [self.tableView reloadData];
+<span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">deleteNote:</span><span class="p">(</span><span class="n">Note</span> <span class="o">*</span><span class="p">)</span><span class="nv">aNote</span>
+<span class="p">{</span>
+    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Delete a note with ID &gt;&gt; %@&quot;</span><span class="p">,</span> <span class="n">aNote</span><span class="p">.</span><span class="n">noteID</span><span class="p">);</span>
+    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">httpClient</span> <span class="n">deletePath</span><span class="o">:</span><span class="p">[</span><span class="n">NSString</span> <span class="n">stringWithFormat</span><span class="o">:</span><span class="s">@&quot;notes/%@&quot;</span><span class="p">,</span><span class="n">aNote</span><span class="p">.</span><span class="n">noteID</span><span class="p">]</span> 
+    <span class="n">parameters</span><span class="o">:</span><span class="nb">nil</span> 
+    <span class="n">success</span><span class="o">:^</span><span class="p">(</span><span class="n">AFHTTPRequestOperation</span> <span class="o">*</span><span class="n">operation</span><span class="p">,</span> <span class="kt">id</span> <span class="n">responseObject</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">responseObject</span> <span class="n">objectFromJSONData</span><span class="p">]);</span>
+            <span class="n">NSDictionary</span> <span class="o">*</span><span class="n">dict</span> <span class="o">=</span> <span class="p">[</span><span class="n">responseObject</span> <span class="n">objectFromJSONData</span><span class="p">];</span>
+            <span class="k">if</span> <span class="p">([</span><span class="n">dict</span><span class="p">[</span><span class="s">@&quot;success&quot;</span><span class="p">]</span> <span class="n">integerValue</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">dataArray</span> <span class="n">removeObjectAtIndex</span><span class="o">:</span><span class="n">self</span><span class="p">.</span><span class="n">indexPathToBeDeleted</span><span class="p">.</span><span class="n">row</span><span class="p">];</span>
+                <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">tableView</span> <span class="n">deleteRowsAtIndexPaths</span><span class="o">:</span><span class="err">@</span><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">indexPathToBeDeleted</span><span class="p">]</span>
+            <span class="nl">withRowAnimation:</span><span class="n">UITableViewRowAnimationFade</span><span class="p">];</span>
+            <span class="p">}</span>
+        <span class="p">}</span> <span class="n">failure</span><span class="o">:^</span><span class="p">(</span><span class="n">AFHTTPRequestOperation</span> <span class="o">*</span><span class="n">operation</span><span class="p">,</span> <span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Failed to delete a note, ERROR &gt;&gt; %@&quot;</span><span class="p">,</span> <span class="n">error</span><span class="p">);</span>
+    <span class="p">}];</span>
+<span class="p">}</span>
 
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Failed to get note list, ERROR &gt;&gt; %@", error);
-}];
+
+
+<span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">updateNote:</span><span class="p">(</span><span class="n">Note</span> <span class="o">*</span><span class="p">)</span><span class="nv">aNote</span>
+<span class="p">{</span>
+    <span class="n">NSDictionary</span> <span class="o">*</span><span class="n">parameters</span> <span class="o">=</span> <span class="err">@</span><span class="p">{</span><span class="s">@&quot;title&quot;</span><span class="o">:</span> <span class="n">aNote</span><span class="p">.</span><span class="n">title</span><span class="p">,</span>
+     <span class="s">@&quot;content&quot;</span><span class="o">:</span> <span class="n">aNote</span><span class="p">.</span><span class="n">content</span><span class="p">,</span> 
+     <span class="s">@&quot;author&quot;</span><span class="o">:</span> <span class="n">aNote</span><span class="p">.</span><span class="n">author</span><span class="p">};</span>
+    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">httpClient</span> <span class="n">putPath</span><span class="o">:</span><span class="p">[</span><span class="n">NSString</span> <span class="n">stringWithFormat</span><span class="o">:</span><span class="s">@&quot;notes/%@&quot;</span><span class="p">,</span><span class="n">aNote</span><span class="p">.</span><span class="n">noteID</span><span class="p">]</span>
+    <span class="nl">parameters:</span><span class="n">parameters</span> 
+    <span class="n">success</span><span class="o">:^</span><span class="p">(</span><span class="n">AFHTTPRequestOperation</span> <span class="o">*</span><span class="n">operation</span><span class="p">,</span> <span class="kt">id</span> <span class="n">responseObject</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">responseObject</span> <span class="n">objectFromJSONData</span><span class="p">]);</span>
+            <span class="n">NSDictionary</span> <span class="o">*</span><span class="n">dict</span> <span class="o">=</span> <span class="p">[</span><span class="n">responseObject</span> <span class="n">objectFromJSONData</span><span class="p">];</span>
+            <span class="k">if</span> <span class="p">([</span><span class="n">dict</span><span class="p">[</span><span class="s">@&quot;success&quot;</span><span class="p">]</span> <span class="n">integerValue</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">navigationController</span> <span class="n">popViewControllerAnimated</span><span class="o">:</span><span class="nb">YES</span><span class="p">];</span>
+                <span class="p">[</span><span class="n">self</span> <span class="n">refreshList</span><span class="p">];</span>
+            <span class="p">}</span>
+
+        <span class="p">}</span> <span class="n">failure</span><span class="o">:^</span><span class="p">(</span><span class="n">AFHTTPRequestOperation</span> <span class="o">*</span><span class="n">operation</span><span class="p">,</span> <span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Failed to update a note, ERROR &gt;&gt; %@&quot;</span><span class="p">,</span> <span class="n">error</span><span class="p">);</span>
+
+    <span class="p">}];</span>
+<span class="p">}</span>
+
+<span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">createNote:</span><span class="p">(</span><span class="n">Note</span> <span class="o">*</span><span class="p">)</span><span class="nv">aNote</span>
+<span class="p">{</span>
+    <span class="n">NSDictionary</span> <span class="o">*</span><span class="n">parameters</span> <span class="o">=</span> <span class="err">@</span><span class="p">{</span><span class="s">@&quot;title&quot;</span><span class="o">:</span> <span class="n">aNote</span><span class="p">.</span><span class="n">title</span><span class="p">,</span>
+     <span class="s">@&quot;content&quot;</span><span class="o">:</span> <span class="n">aNote</span><span class="p">.</span><span class="n">content</span><span class="p">,</span> 
+     <span class="s">@&quot;author&quot;</span><span class="o">:</span> <span class="n">aNote</span><span class="p">.</span><span class="n">author</span><span class="p">};</span>
+
+    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">httpClient</span> <span class="n">postPath</span><span class="o">:</span><span class="s">@&quot;notes&quot;</span> <span class="n">parameters</span><span class="o">:</span><span class="n">parameters</span> 
+    <span class="n">success</span><span class="o">:^</span><span class="p">(</span><span class="n">AFHTTPRequestOperation</span> <span class="o">*</span><span class="n">operation</span><span class="p">,</span> <span class="kt">id</span> <span class="n">responseObject</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">responseObject</span> <span class="n">objectFromJSONData</span><span class="p">]);</span>
+            <span class="n">NSDictionary</span> <span class="o">*</span><span class="n">dict</span> <span class="o">=</span> <span class="p">[</span><span class="n">responseObject</span> <span class="n">objectFromJSONData</span><span class="p">];</span>
+            <span class="k">if</span> <span class="p">([</span><span class="n">dict</span><span class="p">[</span><span class="s">@&quot;success&quot;</span><span class="p">]</span> <span class="n">integerValue</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">navigationController</span> <span class="n">popViewControllerAnimated</span><span class="o">:</span><span class="nb">YES</span><span class="p">];</span>
+                <span class="p">[</span><span class="n">self</span> <span class="n">refreshList</span><span class="p">];</span>
+            <span class="p">}</span>
+        <span class="p">}</span> <span class="n">failure</span><span class="o">:^</span><span class="p">(</span><span class="n">AFHTTPRequestOperation</span> <span class="o">*</span><span class="n">operation</span><span class="p">,</span> <span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Failed to create a note, ERROR &gt;&gt; %@&quot;</span><span class="p">,</span> <span class="n">error</span><span class="p">);</span>
+    <span class="p">}];</span>
+<span class="p">}</span>
 </code></pre>
-
-<p>}</p>
-
-<ul>
-<li><p>(void)deleteNote:(Note <em>)aNote
-{
-  NSLog(@"Delete a note with ID >> %@", aNote.noteID);
-  [self.httpClient deletePath:[NSString stringWithFormat:@"notes/%@",aNote.noteID]
-  parameters:nil
-  success:^(AFHTTPRequestOperation </em>operation, id responseObject) {
-          NSLog(@"%@", [responseObject objectFromJSONData]);
-          NSDictionary <em>dict = [responseObject objectFromJSONData];
-          if ([dict[@"success"] integerValue] == 1) {
-              [self.dataArray removeObjectAtIndex:self.indexPathToBeDeleted.row];
-              [self.tableView deleteRowsAtIndexPaths:@[self.indexPathToBeDeleted]
-          withRowAnimation:UITableViewRowAnimationFade];
-          }
-      } failure:^(AFHTTPRequestOperation </em>operation, NSError *error) {
-              NSLog(@"Failed to delete a note, ERROR >> %@", error);
-  }];
-}</p></li>
-<li><p>(void)updateNote:(Note <em>)aNote
-{
-  NSDictionary </em>parameters = @{@"title": aNote.title,
-   @"content": aNote.content,
-   @"author": aNote.author};
-  [self.httpClient putPath:[NSString stringWithFormat:@"notes/%@",aNote.noteID]
-  parameters:parameters
-  success:^(AFHTTPRequestOperation <em>operation, id responseObject) {
-          NSLog(@"%@", [responseObject objectFromJSONData]);
-          NSDictionary </em>dict = [responseObject objectFromJSONData];
-          if ([dict[@"success"] integerValue] == 1) {
-              [self.navigationController popViewControllerAnimated:YES];
-              [self refreshList];
-          }</p>
-
-<pre><code>  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-          NSLog(@"Failed to update a note, ERROR &gt;&gt; %@", error);
-</code></pre>
-
-<p>  }];
-}</p></li>
-<li><p>(void)createNote:(Note <em>)aNote
-{
-  NSDictionary </em>parameters = @{@"title": aNote.title,
-   @"content": aNote.content,
-   @"author": aNote.author};</p>
-
-<p>  [self.httpClient postPath:@"notes" parameters:parameters
-  success:^(AFHTTPRequestOperation <em>operation, id responseObject) {
-          NSLog(@"%@", [responseObject objectFromJSONData]);
-          NSDictionary </em>dict = [responseObject objectFromJSONData];
-          if ([dict[@"success"] integerValue] == 1) {
-              [self.navigationController popViewControllerAnimated:YES];
-              [self refreshList];
-          }
-      } failure:^(AFHTTPRequestOperation <em>operation, NSError </em>error) {
-              NSLog(@"Failed to create a note, ERROR >> %@", error);
-  }];
-}</p></li>
-</ul>
+</div>
 
 
 <p>iOS 端的具体逻辑也大致是这样了，整个教程就分 server 端 和 iOS 端 2个简洁的教程，具体看托管在 <a href="https://github.com/levey/WhateverNote">GitHub</a> 上的代码。</p>
@@ -213,7 +211,7 @@ NoteViewConrller 功能是新增、查看、更新单个 Note 的信息 (通过�
  <p class="signature">2012-12-21  written by levey </p>
 </div>
 
-<div id="related">
+<!-- <div id="related">
   <h3>Related Posts</h3>
   <ul class="posts">
     
@@ -226,7 +224,7 @@ NoteViewConrller 功能是新增、查看、更新单个 Note 的信息 (通过�
   </ul>
 </div>
 
-</div>
+</div> -->
     
     </div>
   </div>

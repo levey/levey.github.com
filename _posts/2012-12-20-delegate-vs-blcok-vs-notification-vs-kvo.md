@@ -11,7 +11,8 @@ tags: ["delegate", "block", "notification", "kvo", "iOS"]
 最近在工作中遇到对使用 Delegate 和 Notification 的争议，我写下了自己的观点。
 
 #### Delegate
----
+
+***
 
 ##### 优点：
 
@@ -31,6 +32,8 @@ tags: ["delegate", "block", "notification", "kvo", "iOS"]
 
 #### Block
 
+***
+
 ##### 优点：
 
 1. 匿名方法，不需要额外定义方法。
@@ -45,7 +48,8 @@ tags: ["delegate", "block", "notification", "kvo", "iOS"]
 
 
 #### Notification
----
+
+***
 
 ##### 优点：
 
@@ -66,7 +70,8 @@ tags: ["delegate", "block", "notification", "kvo", "iOS"]
 
 
 #### KVO
----
+
+***
 
 ##### 优点：
 

@@ -46,6 +46,8 @@ Node.js: `Sublime Text 2` / ` iTerm 2`
 
 然后我们看一下 app.js 这个文件，
 
+{% highlight js %}
+
 	var express = require('express')
  	 , routes = require('./routes')
  	 , user = require('./routes/user')
@@ -53,9 +55,12 @@ Node.js: `Sublime Text 2` / ` iTerm 2`
 	 , path = require('path');
 
 	var app = express();
+
+{% endhighlight %}
 	
 这些是一些变量，express 是以文件目录的形式来定义类型的。
 
+{% highlight js %}
 
 	app.configure(function(){
   	  app.set('port', process.env.PORT || 3000);
@@ -69,19 +74,30 @@ Node.js: `Sublime Text 2` / ` iTerm 2`
   	  app.use(express.static(path.join(__dirname, 'public')));
 	});
 
+
+{% endhighlight %}
+
 这些是对 express 的配置。
 
 接下来
 
+{% highlight js %}
+
 	app.get('/', routes.index);
+
+{% endhighlight %}
 
 这一行就是对刚才访问到的主页的处理。
 
 最后
 
+{% highlight js %}
+
 	http.createServer(app).listen(app.get('port'), function(){
       console.log("Express server listening on port " + app.get('port'));
     });
+
+{% endhighlight %}
     
 就是服务器的创建，因为 Node.js 运行环境本身可以作为 web server，所以不用 apache/nginx 等类似的 web server.
 
@@ -93,11 +109,17 @@ Node.js: `Sublime Text 2` / ` iTerm 2`
 
 在 **controllers/note.js** 写上如下代码
 
+{% highlight js %}
+
 	exports.index = function (req, res) {
 	  res.send('hello world');
 	};
 
+{% endhighlight %}
+
 然后在 **routes.js** 写下如下代码
+
+{% highlight js %}
 
 	var note = require('./controllers/note')
 
@@ -107,16 +129,24 @@ Node.js: `Sublime Text 2` / ` iTerm 2`
 	  });
 	};
 
+{% endhighlight %}
+
 最后在 **app.js** 中 把那些 express 的默认建立的 user 变量删除，然后用以下代码替换原来的路由代码。
+
+{% highlight js %}
 
 	routes.route(app);
 	// app.get('/', routes.index);
+
+{% endhighlight %}
 
 然后重新启动 Server (node app.js)，我们就可以看到主页只输出 hello world 字符串。
 
 ##### 创建Model
 
 mongoose 这个库管理 MongoDB 听方便的，在 **/models/note.js** 里写下如下代码
+
+{% highlight js %}
 
 	var mongoose = require('mongoose');
     var db = mongoose.createConnection('mongodb://localhost/notes')
@@ -128,9 +158,15 @@ mongoose 这个库管理 MongoDB 听方便的，在 **/models/note.js** 里写�
 
     exports.Note = db.model('Note',NoteSchema);
 
+{% endhighlight %}
+
 然后我们在 **/controllers/note.js** 里用一句
 
+{% highlight js %}
+
 	var Note = require('../models/note').Note;
+
+{% endhighlight %}
 
 来引入 Note 这个 model，之后在这个 controller 里就能新建 Note 对象了。
 
@@ -139,6 +175,8 @@ mongoose 这个库管理 MongoDB 听方便的，在 **/models/note.js** 里写�
 ##### 创建路由
 
 在 **routes.js** 里追加如下 API
+
+{% highlight js %}
 
 	var note = require('./controllers/note')
 
@@ -153,6 +191,8 @@ mongoose 这个库管理 MongoDB 听方便的，在 **/models/note.js** 里写�
 	  app.delete('/notes/:id', note.destroy);
 	};
 
+{% endhighlight %}
+
 第一个就是获取 note 列表。
 
 第二个是得到一个 note 的详细信息（不过咱这个 demo 直接一个列表就有了详细信息）。
@@ -165,6 +205,8 @@ mongoose 这个库管理 MongoDB 听方便的，在 **/models/note.js** 里写�
 ##### 最后一步，完善 Controller
 
 在之前一步我们看到了 每个 API 都调用了 controller 里的相应方法, 打开 **./controllers/note** 输入如下代码
+
+{% highlight js %}
 
 var Note = require('../models/note').Note;
 
@@ -242,6 +284,7 @@ var Note = require('../models/note').Note;
 	  }
 	}
 
+{% endhighlight %}
 
 ##### 测试
 
@@ -258,6 +301,8 @@ var Note = require('../models/note').Note;
 最后，可以写个脚本试一下创建一个 note, Ruby 代码如下
 
 
+{% highlight ruby %}
+
 	require 'net/http'
 	response = Net::HTTP.post_form(URI.parse('http://localhost:3000/notes'), 
                                {title: 'hello world',
@@ -265,6 +310,8 @@ var Note = require('../models/note').Note;
                                	author: 'levey'})
  
 	puts response.body
+
+{% endhighlight %}
 
 如果输出 { "success": 1 } ， 说明创建成功。
 

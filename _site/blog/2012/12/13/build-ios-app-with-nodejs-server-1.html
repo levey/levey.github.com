@@ -6,11 +6,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>Levey write here</title>
+  <title>Levey writing</title>
   <meta name="author" content="Levey" />
   <link rel="stylesheet" href="/css/base.css">
   <link rel="stylesheet" href="/css/skeleton.css">
-  <link rel="stylesheet" href="/css/screen.css">
+  <link rel="stylesheet" href="/css/blog.css">
   <link rel="stylesheet" href="/css/layout.css">
   <link rel="stylesheet" href="/fonts/font-awesome.css">
   <link rel="stylesheet" href="/css/pygments.css">
@@ -70,45 +70,49 @@
 
 <p>然后我们看一下 app.js 这个文件，</p>
 
-<pre><code>var express = require('express')
- , routes = require('./routes')
- , user = require('./routes/user')
- , http = require('http')
- , path = require('path');
+<div class="highlight"><pre><code class="js">   <span class="kd">var</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;express&#39;</span><span class="p">)</span>
+     <span class="p">,</span> <span class="nx">routes</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./routes&#39;</span><span class="p">)</span>
+     <span class="p">,</span> <span class="nx">user</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./routes/user&#39;</span><span class="p">)</span>
+     <span class="p">,</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">)</span>
+     <span class="p">,</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">);</span>
 
-var app = express();
-</code></pre>
+    <span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
+</code></pre></div>
+
 
 <p>这些是一些变量，express 是以文件目录的形式来定义类型的。</p>
 
-<pre><code>app.configure(function(){
-  app.set('port', process.env.PORT || 3000);
-  app.set('views', __dirname + '/views');
-  app.set('view engine', 'jade');
-  app.use(express.favicon());
-  app.use(express.logger('dev'));
-  app.use(express.bodyParser());
-  app.use(express.methodOverride());
-  app.use(app.router);
-  app.use(express.static(path.join(__dirname, 'public')));
-});
-</code></pre>
+<div class="highlight"><pre><code class="js">   <span class="nx">app</span><span class="p">.</span><span class="nx">configure</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+      <span class="nx">app</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;port&#39;</span><span class="p">,</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">PORT</span> <span class="o">||</span> <span class="mi">3000</span><span class="p">);</span>
+      <span class="nx">app</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;views&#39;</span><span class="p">,</span> <span class="nx">__dirname</span> <span class="o">+</span> <span class="s1">&#39;/views&#39;</span><span class="p">);</span>
+      <span class="nx">app</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;view engine&#39;</span><span class="p">,</span> <span class="s1">&#39;jade&#39;</span><span class="p">);</span>
+      <span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="nx">favicon</span><span class="p">());</span>
+      <span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="nx">logger</span><span class="p">(</span><span class="s1">&#39;dev&#39;</span><span class="p">));</span>
+      <span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="nx">bodyParser</span><span class="p">());</span>
+      <span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="nx">methodOverride</span><span class="p">());</span>
+      <span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">app</span><span class="p">.</span><span class="nx">router</span><span class="p">);</span>
+      <span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="kr">static</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">&#39;public&#39;</span><span class="p">)));</span>
+    <span class="p">});</span>
+</code></pre></div>
+
 
 <p>这些是对 express 的配置。</p>
 
 <p>接下来</p>
 
-<pre><code>app.get('/', routes.index);
-</code></pre>
+<div class="highlight"><pre><code class="js">   <span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="nx">routes</span><span class="p">.</span><span class="nx">index</span><span class="p">);</span>
+</code></pre></div>
+
 
 <p>这一行就是对刚才访问到的主页的处理。</p>
 
 <p>最后</p>
 
-<pre><code>http.createServer(app).listen(app.get('port'), function(){
-  console.log("Express server listening on port " + app.get('port'));
-});
-</code></pre>
+<div class="highlight"><pre><code class="js">   <span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="nx">app</span><span class="p">).</span><span class="nx">listen</span><span class="p">(</span><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;port&#39;</span><span class="p">),</span> <span class="kd">function</span><span class="p">(){</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Express server listening on port &quot;</span> <span class="o">+</span> <span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;port&#39;</span><span class="p">));</span>
+    <span class="p">});</span>
+</code></pre></div>
+
 
 <p>就是服务器的创建，因为 Node.js 运行环境本身可以作为 web server，所以不用 apache/nginx 等类似的 web server.</p>
 
@@ -120,27 +124,30 @@ var app = express();
 
 <p>在 <strong>controllers/note.js</strong> 写上如下代码</p>
 
-<pre><code>exports.index = function (req, res) {
-  res.send('hello world');
-};
-</code></pre>
+<div class="highlight"><pre><code class="js">   <span class="nx">exports</span><span class="p">.</span><span class="nx">index</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;hello world&#39;</span><span class="p">);</span>
+    <span class="p">};</span>
+</code></pre></div>
+
 
 <p>然后在 <strong>routes.js</strong> 写下如下代码</p>
 
-<pre><code>var note = require('./controllers/note')
+<div class="highlight"><pre><code class="js">   <span class="kd">var</span> <span class="nx">note</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./controllers/note&#39;</span><span class="p">)</span>
 
-exports.route = function (app) {
-  app.get('/', function(req, res) {
-    res.send('hello world');
-  });
-};
-</code></pre>
+    <span class="nx">exports</span><span class="p">.</span><span class="nx">route</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">app</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;hello world&#39;</span><span class="p">);</span>
+      <span class="p">});</span>
+    <span class="p">};</span>
+</code></pre></div>
+
 
 <p>最后在 <strong>app.js</strong> 中 把那些 express 的默认建立的 user 变量删除，然后用以下代码替换原来的路由代码。</p>
 
-<pre><code>routes.route(app);
-// app.get('/', routes.index);
-</code></pre>
+<div class="highlight"><pre><code class="js">   <span class="nx">routes</span><span class="p">.</span><span class="nx">route</span><span class="p">(</span><span class="nx">app</span><span class="p">);</span>
+    <span class="c1">// app.get(&#39;/&#39;, routes.index);</span>
+</code></pre></div>
+
 
 <p>然后重新启动 Server (node app.js)，我们就可以看到主页只输出 hello world 字符串。</p>
 
@@ -148,21 +155,23 @@ exports.route = function (app) {
 
 <p>mongoose 这个库管理 MongoDB 听方便的，在 <strong>/models/note.js</strong> 里写下如下代码</p>
 
-<pre><code>var mongoose = require('mongoose');
-var db = mongoose.createConnection('mongodb://localhost/notes')
-var NoteSchema = mongoose.Schema({
-  title: String,
-  content: String,
-  author: String
-});
+<div class="highlight"><pre><code class="js">   <span class="kd">var</span> <span class="nx">mongoose</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;mongoose&#39;</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">db</span> <span class="o">=</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">createConnection</span><span class="p">(</span><span class="s1">&#39;mongodb://localhost/notes&#39;</span><span class="p">)</span>
+    <span class="kd">var</span> <span class="nx">NoteSchema</span> <span class="o">=</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">Schema</span><span class="p">({</span>
+      <span class="nx">title</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span>
+      <span class="nx">content</span><span class="o">:</span> <span class="nb">String</span><span class="p">,</span>
+      <span class="nx">author</span><span class="o">:</span> <span class="nb">String</span>
+    <span class="p">});</span>
 
-exports.Note = db.model('Note',NoteSchema);
-</code></pre>
+    <span class="nx">exports</span><span class="p">.</span><span class="nx">Note</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">model</span><span class="p">(</span><span class="s1">&#39;Note&#39;</span><span class="p">,</span><span class="nx">NoteSchema</span><span class="p">);</span>
+</code></pre></div>
+
 
 <p>然后我们在 <strong>/controllers/note.js</strong> 里用一句</p>
 
-<pre><code>var Note = require('../models/note').Note;
-</code></pre>
+<div class="highlight"><pre><code class="js">   <span class="kd">var</span> <span class="nx">Note</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../models/note&#39;</span><span class="p">).</span><span class="nx">Note</span><span class="p">;</span>
+</code></pre></div>
+
 
 <p>来引入 Note 这个 model，之后在这个 controller 里就能新建 Note 对象了。</p>
 
@@ -170,19 +179,20 @@ exports.Note = db.model('Note',NoteSchema);
 
 <p>在 <strong>routes.js</strong> 里追加如下 API</p>
 
-<pre><code>var note = require('./controllers/note')
+<div class="highlight"><pre><code class="js">   <span class="kd">var</span> <span class="nx">note</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./controllers/note&#39;</span><span class="p">)</span>
 
-exports.route = function (app) {
-  app.get('/', function(req, res) {
-    res.send('hello world');
-  });
-  app.get('/notes', note.index);
-  app.get('/notes/:id', note.show);
-  app.post('/notes', note.create);
-  app.put('/notes/:id',note.update);
-  app.delete('/notes/:id', note.destroy);
-};
-</code></pre>
+    <span class="nx">exports</span><span class="p">.</span><span class="nx">route</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">app</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;hello world&#39;</span><span class="p">);</span>
+      <span class="p">});</span>
+      <span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/notes&#39;</span><span class="p">,</span> <span class="nx">note</span><span class="p">.</span><span class="nx">index</span><span class="p">);</span>
+      <span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/notes/:id&#39;</span><span class="p">,</span> <span class="nx">note</span><span class="p">.</span><span class="nx">show</span><span class="p">);</span>
+      <span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/notes&#39;</span><span class="p">,</span> <span class="nx">note</span><span class="p">.</span><span class="nx">create</span><span class="p">);</span>
+      <span class="nx">app</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="s1">&#39;/notes/:id&#39;</span><span class="p">,</span><span class="nx">note</span><span class="p">.</span><span class="nx">update</span><span class="p">);</span>
+      <span class="nx">app</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="s1">&#39;/notes/:id&#39;</span><span class="p">,</span> <span class="nx">note</span><span class="p">.</span><span class="nx">destroy</span><span class="p">);</span>
+    <span class="p">};</span>
+</code></pre></div>
+
 
 <p>第一个就是获取 note 列表。</p>
 
@@ -196,82 +206,83 @@ exports.route = function (app) {
 
 <p>在之前一步我们看到了 每个 API 都调用了 controller 里的相应方法, 打开 <strong>./controllers/note</strong> 输入如下代码</p>
 
-<p>var Note = require('../models/note').Note;</p>
+<div class="highlight"><pre><code class="js"><span class="kd">var</span> <span class="nx">Note</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../models/note&#39;</span><span class="p">).</span><span class="nx">Note</span><span class="p">;</span>
 
-<pre><code>exports.index = function(req, res) {
-  Note.find(function(err, notes) {
-    if (!err) {
-        res.send(notes);
-    } else {
-        res.send(err);
-    }
-  });
-}
+    <span class="nx">exports</span><span class="p">.</span><span class="nx">index</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">Note</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">notes</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">notes</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+        <span class="p">}</span>
+      <span class="p">});</span>
+    <span class="p">}</span>
 
-exports.show = function(req, res) {
-  Note.findById(req.params.id, function (err, note) {
-    if (!err) {
-      res.send({success: 1, note: note});
-    } else {
-      res.send({success: 0});
-    }
-  });
-}
+    <span class="nx">exports</span><span class="p">.</span><span class="nx">show</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">Note</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">note</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span><span class="nx">success</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">note</span><span class="o">:</span> <span class="nx">note</span><span class="p">});</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span><span class="nx">success</span><span class="o">:</span> <span class="mi">0</span><span class="p">});</span>
+        <span class="p">}</span>
+      <span class="p">});</span>
+    <span class="p">}</span>
 
-exports.create = function(req, res) {
-  var note = new Note();
-  note.title = req.body.title;
-  note.content = req.body.content;
-  note.author = req.body.author;
-  console.log(note);
-  note.save(function(err){
-    if (!err) {
-        res.send({success: 1});
-    } else {
-        res.send({success: 0});
-    }
-  });
-}
+    <span class="nx">exports</span><span class="p">.</span><span class="nx">create</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">note</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Note</span><span class="p">();</span>
+      <span class="nx">note</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">title</span><span class="p">;</span>
+      <span class="nx">note</span><span class="p">.</span><span class="nx">content</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">content</span><span class="p">;</span>
+      <span class="nx">note</span><span class="p">.</span><span class="nx">author</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">author</span><span class="p">;</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">note</span><span class="p">);</span>
+      <span class="nx">note</span><span class="p">.</span><span class="nx">save</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">){</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span><span class="nx">success</span><span class="o">:</span> <span class="mi">1</span><span class="p">});</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span><span class="nx">success</span><span class="o">:</span> <span class="mi">0</span><span class="p">});</span>
+        <span class="p">}</span>
+      <span class="p">});</span>
+    <span class="p">}</span>
+    
+    <span class="nx">exports</span><span class="p">.</span><span class="nx">update</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">update</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="nx">title</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">param</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">),</span> 
+        <span class="nx">content</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">param</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">),</span> 
+        <span class="nx">author</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">param</span><span class="p">(</span><span class="s1">&#39;author&#39;</span><span class="p">)</span>
+      <span class="p">};</span>
+      <span class="nx">Note</span><span class="p">.</span><span class="nx">findByIdAndUpdate</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span> <span class="nx">update</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span><span class="nx">success</span><span class="o">:</span> <span class="mi">1</span><span class="p">});</span>
+        <span class="p">}</span>
+      <span class="p">});</span>
+    <span class="p">}</span>
 
-exports.update = function(req, res) {
-  var update = {
-    title: req.param('title'), 
-    content: req.param('content'), 
-    author: req.param('author')
-  };
-  Note.findByIdAndUpdate(req.params.id, update, function(err) {
-    if (err) {
-      res.send(err);
-    } else {
-      res.send({success: 1});
-    }
-  });
-}
+    <span class="nx">exports</span><span class="p">.</span><span class="nx">destroy</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span><span class="nx">success</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">error</span><span class="o">:</span> <span class="s2">&quot;Need &lt;id&gt; parameter.&quot;</span><span class="p">});</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">Note</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">note</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">note</span><span class="p">)</span> <span class="p">{</span>
+              <span class="nx">note</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span><span class="nx">success</span><span class="o">:</span> <span class="mi">1</span><span class="p">});</span>
+                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                    <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span><span class="nx">success</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">error</span><span class="o">:</span> <span class="s2">&quot;Failed to delete.&quot;</span><span class="p">});</span>
+                <span class="p">}</span>
+              <span class="p">});</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span><span class="nx">success</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">error</span><span class="o">:</span> <span class="s2">&quot;Can not find note.&quot;</span><span class="p">});</span>
+            <span class="p">}</span>
+          <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span><span class="nx">success</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">error</span><span class="o">:</span> <span class="s2">&quot;Failed to delete.&quot;</span><span class="p">});</span>
+          <span class="p">}</span>
+        <span class="p">});</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+</code></pre></div>
 
-exports.destroy = function(req, res) {
-  if (!req.params.id) {
-    res.send({success: 0, error: "Need &lt;id&gt; parameter."});
-  } else {
-    Note.findById(req.params.id, function (err, note) {
-      if (!err) {
-        if (note) {
-          note.remove(function(err) {
-            if (!err) {
-                res.send({success: 1});
-            } else {
-                res.send({success: 0, error: "Failed to delete."});
-            }
-          });
-        } else {
-            res.send({success: 0, error: "Can not find note."});
-        }
-      } else {
-        res.send({success: 0, error: "Failed to delete."});
-      }
-    });
-  }
-}
-</code></pre>
 
 <h5>测试</h5>
 
@@ -287,14 +298,15 @@ brew install mongodb
 
 <p>最后，可以写个脚本试一下创建一个 note, Ruby 代码如下</p>
 
-<pre><code>require 'net/http'
-response = Net::HTTP.post_form(URI.parse('http://localhost:3000/notes'), 
-                           {title: 'hello world',
-                            content: 'hello big world',
-                            author: 'levey'})
+<div class="highlight"><pre><code class="ruby"> <span class="nb">require</span> <span class="s1">&#39;net/http&#39;</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="ss">Net</span><span class="p">:</span><span class="ss">:HTTP</span><span class="o">.</span><span class="n">post_form</span><span class="p">(</span><span class="no">URI</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;http://localhost:3000/notes&#39;</span><span class="p">),</span> 
+                               <span class="p">{</span><span class="ss">title</span><span class="p">:</span> <span class="s1">&#39;hello world&#39;</span><span class="p">,</span>
+                                <span class="ss">content</span><span class="p">:</span> <span class="s1">&#39;hello big world&#39;</span><span class="p">,</span>
+                                <span class="ss">author</span><span class="p">:</span> <span class="s1">&#39;levey&#39;</span><span class="p">})</span>
+ 
+    <span class="nb">puts</span> <span class="n">response</span><span class="o">.</span><span class="n">body</span>
+</code></pre></div>
 
-puts response.body
-</code></pre>
 
 <p>如果输出 { "success": 1 } ， 说明创建成功。</p>
 

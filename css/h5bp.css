@@ -160,7 +160,7 @@ ul.navigation
     display:inline;
     float:right;
     list-style-type:none;
-    margin-top:-22px;
+    margin-top:-34px;
 }
 
 ul.navigation li
@@ -170,6 +170,7 @@ ul.navigation li
     font-family: "Helvetica Neue", "Helvetica", sans-serif;
     font-size:1.2em;
     margin-left:60px;
+    padding: 2px 0px;
 }
 
 ul.navigation li:hover,ul.navigation li.on

@@ -337,6 +337,17 @@ input[type="submit"] {
   margin-top: 34px;
 }
 
+.contact-icons {
+  vertical-align: middle;
+  font-size: 56px; 
+}
+
+.contact-icon {
+  display: inline-block;
+  width: 23.5%;
+  text-align: center;
+}
+
 /* =============================================================================
    Media Queries
    ========================================================================== */

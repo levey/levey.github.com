@@ -321,20 +321,20 @@ input[type="submit"] {
 }
 
 .or {
-  margin-left: 170px;
+  margin-left: 126px;
   text-align: center;
   color: #E0E0E0;
 }
 
 .scantip {
-  margin-right: 82px;
+  margin-right: 150px;
   float: right;
 }
 
 .qrcode {
-  box-shadow: 0 0 10px #aaa;
   float: right;
-  margin-top: 26px;
+  border: 1px solid #ddd;
+  margin-top: 34px;
 }
 
 /* =============================================================================

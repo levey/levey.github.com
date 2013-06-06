@@ -13,6 +13,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0,width=320.1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <link rel="stylesheet" href="/css/h5bp.css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
   <script src="/js/jquery-1.9.1.min.js"></script>
 
   <script>
@@ -24,7 +25,7 @@
   ga('create', 'UA-41320932-1', 'golevey.com');
   ga('send', 'pageview');
 
-</script>
+  </script>
 
 </head>
 
@@ -46,26 +47,36 @@
 </header>
 
  <div roll="main" class="secondary">
-       <p>Tap an icon to download</p>
+	 <p class="products-title">
+	 	<span class="taptip">Tap an icon to download</span>
+	 	<span class="or">or</span>
+	 	<span class="scantip">Scan the QR Code</span>
+
+	 </p>
 		
-		<ul class="pass-icons">
+		<ul class="product-list">
 					<li>
 						<a target="_blank" href="http://itunes.apple.com/us/app/photostring/id487645953?ls=1&mt=8"><img src="/images/icon-photostring.png" />
-						<span>PhotoString</span></a>
+						<span>PhotoString</span></a><!-- <i class="icon-qrcode qrcode"></i> -->
 					</li>
 					<input type="hidden" name="templatess_templates" value="1">
 					<li>
 						<a target="_blank" href="http://itunes.apple.com/us/app/photostring-free/id493950579?ls=1&mt=8"><img src="/images/icon-photostringfree.png" />
-						<span>PhotoString Free</span></a>
+						<span>PhotoString Free</span></a> <!-- <i class="icon-qrcode qrcode"></i> -->
 							
 					</li>
 
 					<li>
 						<a target="_blank" href="http://itunes.apple.com/us/app/remain/id522311344?ls=1&mt=8"><img src="/images/icon-remain.png" />
-						<span>Remain</span></a>
+						<span>Remain</span></a><!-- <i class="icon-qrcode qrcode"></i> -->
 							
 					</li>
 		</ul>
+
+	<div class="qrcode">
+		<img src="/images/qrcode-products.png" alt="QR Code of PhotoString">
+	</div>
+
 </div>
 
   

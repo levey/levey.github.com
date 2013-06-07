@@ -2,8 +2,7 @@
 layout: blog
 ---
 
-<div roll="main" class="secondary">
-<p class="meta">
+<div class="post-container">
 <a href="/blog.html"><i class="home icon-home"></i></a>
 </p>
 <h2 class="title">{{ page.title }}</h2>
@@ -14,14 +13,3 @@ layout: blog
 
  <p class="signature">{{ page.date | date: "%Y-%m-%d " }} written by levey </p>
 </div>
-
-<!-- <div id="related">
-  <h3>Related Posts</h3>
-  <ul class="posts">
-    {% for post in site.related_posts limit:3 %}
-    <li><span>{{ post.date | date: "%Y-%m-%d" }} &raquo;</span> <a href="{{ post.url }}">{{ post.title }}</a></li>
-    {% endfor %}
-  </ul>
-</div>
-
-</div> -->

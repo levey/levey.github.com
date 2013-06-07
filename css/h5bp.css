@@ -81,7 +81,7 @@ p, h3, h4, code {
     font-size:1.2em;
 }
 
-p, h3, h4
+p, h2, h3, h4
 {
     color:#6c6c6c;
     font-family: "Helvetica Neue", "Helvetica", sans-serif;
@@ -198,21 +198,12 @@ ul.posts span {
     width:840px;
 }
 
-.secondary h2
-{
-    font-size:3em;
-}
-
-.secondary h3 {
-    border-bottom: 1px solid #ccc;
-    margin-top: 2em;
-}
 
 .secondary p
 {
     font-size:1.3em;
     line-height:1.5em;
-    margin:5px 0 30px;
+    margin:5px 0 15px;
     text-align:left;
 }
 
@@ -347,6 +338,11 @@ input[type="submit"] {
   text-align: center;
 }
 
+.self-description h3 {
+  margin-bottom: 20px;
+}
+
+
 /* =============================================================================
    Media Queries
    ========================================================================== */
@@ -478,7 +474,6 @@ input[type="submit"] {
     .main p:first-child {
         margin-top: 10px;
     }
-
 }
 
 

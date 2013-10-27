@@ -1,0 +1,298 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<style>
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: "Helvetica Neue", Helvetica, "Hiragino Sans GB", Arial, sans-serif;
+    font-size: 14px;
+    line-height: 18px;
+    color: #737373;
+    background-color: white;
+    margin: 10px 13px 10px 13px;
+}
+table {
+	margin: 10px 0 15px 0;
+	border-collapse: collapse;
+}
+td,th {	
+	border: 1px solid #ddd;
+	padding: 3px 10px;
+}
+th {
+	padding: 5px 10px;	
+}
+
+a {
+    color: #3978FB;
+    text-decoration: none;
+}
+a:hover {
+    color: #0050a3;
+}
+a img {
+    border: none;
+}
+p {
+    margin-bottom: 9px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #404040;
+    line-height: 36px;
+}
+h1 {
+    margin-bottom: 18px;
+    font-size: 30px;
+}
+h2 {
+    font-size: 24px;
+}
+h3 {
+    font-size: 18px;
+}
+h4 {
+    font-size: 16px;
+}
+h5 {
+    font-size: 14px;
+}
+h6 {
+    font-size: 13px;
+}
+hr {
+    margin: 0 0 19px;
+    border: 0;
+    border-bottom: 1px solid #ccc;
+}
+blockquote {
+    padding: 13px 13px 21px 15px;
+    margin-bottom: 18px;
+    font-family:georgia,serif;
+    font-style: italic;
+}
+blockquote:before {
+    content:"\201C";
+    font-size:40px;
+    margin-left:-10px;
+    font-family:georgia,serif;
+    color:#eee;
+}
+blockquote p {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 18px;
+    margin-bottom: 0;
+    font-style: italic;
+}
+code, pre {
+    font-family: Monaco, Andale Mono, Courier New, monospace;
+}
+code {
+    background-color: #fee9cc;
+    color: rgba(0, 0, 0, 0.75);
+    padding: 1px 3px;
+    font-size: 12px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+pre {
+    display: block;
+    padding: 14px;
+    margin: 0 0 18px;
+    line-height: 16px;
+    font-size: 11px;
+    border: 1px solid #e8e8e8;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+pre code {
+    background-color: #fff;
+    color:#737373;
+    font-size: 11px;
+    padding: 0;
+}
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0px auto;
+    }
+}
+@media print {
+	body,code,pre code,h1,h2,h3,h4,h5,h6 {
+		color: black;
+	}
+	table, pre {
+		page-break-inside: avoid;
+	}
+}
+</style>
+<title>Levey Zhu (朱建刚)</title>
+
+</head>
+<body>
+<h3>Levey Zhu (朱建刚)</h3>
+
+<p>A 25 years old iOS developer in Hangzhou China.</p>
+
+<hr />
+
+<h3>Experience</h3>
+
+<h6>iOS Developer</h6>
+
+<p><em>Wireless Team of Taobao China  (2012 ~ Present)</em></p>
+
+<h6>iOS Developer</h6>
+
+<p><em>Hangzhou VanillaTech (2010 ~ 2012)</em></p>
+
+<hr />
+
+<h3>Projects</h3>
+
+<p>My GitHub id is <a href="https://github.com/levey"><strong>levey</strong></a>, you can find some things I've done.</p>
+
+<p>Here are some projects I've done, you can click the title if the app is available on App Store .</p>
+
+<p><em>If it's has * prefix, it means I made it in parttime.</em></p>
+
+<p><a href="https://itunes.apple.com/cn/app/tao-bao/id387682726?mt=8"><strong> Taobao</strong> </a></p>
+
+<pre><code>Taobao.com is the largest C2C marketing site in China. I'm currently a member of the wireless team that building the mobile client of Taobao.com. I'm working on a instant messaging moudle called wangwang and feed feature called weitao of it's iPhone client. I also do some improvement works of the SDK of business layer.
+</code></pre>
+
+<p><strong> * Deal Push </strong></p>
+
+<pre><code>The feature is crawling (clawler is written by Node.js) 20 active websites(like http://www.dealmoon.com/) that post discount or sales deals, then save the contents and links to redis store if that deals contains keywords I've added. It has a web front for adding keywords, browsing saved deals, it also has iPhone client so that the backend server could push the deal to iPhone client via APNS. My lovely girl firend often go to some web sites to read that deals, I think it's wasting time, so I did this, and I love it now because it save our time and money. Sorry, it's a private site...... OK I tell you, it's slyfairy.com, username: friend, password: myfriend.
+</code></pre>
+
+<p><strong> * Paste Push </strong></p>
+
+<pre><code>Just push text from website(or Chrome extension) to iPhone client, I did it because iOS 7 has a new feature of background refresh when received remote push notification. So it's convenient that when received notification then put the info to Pasteboard automatically.
+</code></pre>
+
+<p><strong> * KLMessager</strong></p>
+
+<pre><code>An instant messager demo built with Socket.IO, It has web front end and iPhone client. Try it at slyfairy.com:9000, and the username must be levey or karin :)
+</code></pre>
+
+<p><a href="https://itunes.apple.com/cn/app/chong-wu-yi-sheng/id646756698?mt=8"><strong>* Pet Doctor</strong></a></p>
+
+<pre><code>An app for users know what diease does their pets get through chosing symptoms. The other useful feature is looking for pet hospitals around current location.
+</code></pre>
+
+<p><a href="http://itunes.apple.com/us/app/remain/id522311344?mt=8"><strong> * Remain</strong></a></p>
+
+<pre><code>Remain is a productive tool designed for minimalist, just like the interface, plain and easy to use.
+</code></pre>
+
+<p><a href="http://coderxcoder.com/"><strong> * Coder x Coder</strong></a></p>
+
+<pre><code>Coder x Coder（CxC），name likes Hunter x Hunter.
+An iOS 、OS X development forum, hosting on Heroku, little and clean, build with Ruby on Rails when I was learning it.
+</code></pre>
+
+<p><a href="http://itunes.apple.com/us/app/id487645953?mt=8"><strong> * PhotoString</strong></a></p>
+
+<pre><code>PhotoString is an app for people who like put many photos together vertically, just combine multi photos into one like a string.When you finish the photos, you can save it, send it via Email, or share it to Facebook, Twitter and Tumblr.
+</code></pre>
+
+<p><a href="http://itunes.apple.com/cn/app/id415605786?mt=8"><strong>XiangGe</strong></a></p>
+
+<pre><code>An app to merge photoes, user can select several photos to make it to be one. then shake the phone to reorder the photoes, some nice frames are also supported! and share it to Tencent MicroBlog, Sina MicroBlog and Renren. 
+</code></pre>
+
+<p><a href="http://itunes.apple.com/us/app/shange/id455910387?mt=8"><strong>Shange</strong></a></p>
+
+<pre><code>English version of "XiangGe", just changed the sharing methods, it support sharing to Facebook, Twitter, Tumblr.
+</code></pre>
+
+<p><a href="http://itunes.apple.com/us/app/id436715684?mt=8"><strong>PhoneWork</strong></a></p>
+
+<pre><code>Tiny app, match the iPhone model automatically, change the background image,and user can download more background images, at last, make the order of the back's image, send it to server, and the user will received a back case with chosen image.
+</code></pre>
+
+<p><a href="http://itunes.apple.com/us/app/id421320385?mt=8"><strong>PINKE</strong></a></p>
+
+<pre><code>A project for Zhejiang Online，a client like koubei.com, lifestyle category app.
+</code></pre>
+
+<p><a href="http://itunes.apple.com/cn/app/id400852752?mt=8"><strong>Hangzhou Daily</strong></a></p>
+
+<pre><code>Hangzhou Daily, a news paper company, I did it's iPhone client for it when I was at VanillaTech. 
+</code></pre>
+
+<p><a href="http://itunes.apple.com/cn/app/handbook/id432254793?mt=8"><strong>Handbook</strong></a></p>
+
+<pre><code>It's a big project when I was working at VanillaTech. It's a online book store, with backend web site for writers and iPhone/iPad clients and any other mobile devices clients. I added some functions and fix some bugs for iPhone/iPad client.
+</code></pre>
+
+<p><strong>Power GIS</strong></p>
+
+<pre><code>An iPad GIS client，the features are searching electric devices in a city, and displaying the results on MapView. the devices' details is stored in SQLite database file. This app looks very beatiful. I like pragmatic and elegance designs from I starting iOS development.
+</code></pre>
+
+<p><strong>Taizhou Unicom</strong></p>
+
+<pre><code>A project of Taizhou Unicom, So many views, but it's not difficult when I designed some base views.
+</code></pre>
+
+<p><strong>HaagenDazs Order</strong></p>
+
+<pre><code>An order app for HaagenDazs(demo)，it's developed for the waiters to place orders easier, they can use it to scan the QR-Code on the menu to chose dishs, then send the order to server, and the server will send the order to POS system.
+</code></pre>
+
+<p><strong>Bluetooth RPS</strong></p>
+
+<pre><code>When I started to learn iOS developement, I made this tiny game. Shake the iPhone, the screent will display the hand sign of Rock, Paper, Scissors, and send the result to another iPhone via bluetooth, then evaluate who is the winer.
+</code></pre>
+
+<p>……</p>
+
+<hr />
+
+<h3>Education</h3>
+
+<p><strong>School</strong>: Hangzhou Dianzi University</p>
+
+<p><strong>Major</strong>:  Software Engineering</p>
+
+<p><strong>Degree</strong>: Bachelor</p>
+
+<hr />
+
+<h3>Contact Me</h3>
+
+<p>If you are interested about me, you can contact me in the ways shown below.</p>
+
+<p><strong>Phone</strong>: +86 18667121397</p>
+
+<p><strong>Mail</strong>: <a href="&#109;&#97;&#105;&#x6c;&#116;&#111;&#x3a;&#108;&#x65;&#118;&#101;&#x79;&#46;&#122;&#x68;&#x75;&#x40;&#x67;&#109;&#97;&#x69;&#x6c;&#x2e;&#99;&#x6f;&#x6d;">&#x6c;&#101;&#x76;&#101;&#121;&#x2e;&#122;&#104;&#117;&#x40;&#x67;&#x6d;&#x61;&#105;&#108;&#x2e;&#x63;&#111;&#x6d;</a></p>
+</body>
+</html>

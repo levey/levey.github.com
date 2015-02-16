@@ -17,7 +17,7 @@ blockquote {
 }
 body {
     font-family: "Helvetica Neue", Helvetica, "Hiragino Sans GB", Arial, sans-serif;
-    font-size: 14px;
+    font-size: 13px;
     line-height: 18px;
     color: #737373;
     background-color: white;
@@ -36,11 +36,11 @@ th {
 }
 
 a {
-    color: #3978FB;
-    text-decoration: none;
+    color: #0069d6;
 }
 a:hover {
     color: #0050a3;
+    text-decoration: none;
 }
 a img {
     border: none;
@@ -119,12 +119,9 @@ pre {
     margin: 0 0 18px;
     line-height: 16px;
     font-size: 11px;
-    border: 1px solid #e8e8e8;
+    border: 1px solid #d9d9d9;
     white-space: pre-wrap;
     word-wrap: break-word;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
 }
 pre code {
     background-color: #fff;
@@ -143,7 +140,7 @@ sup {
 @media screen and (min-width: 914px) {
     body {
         width: 854px;
-        margin:0px auto;
+        margin:10px auto;
     }
 }
 @media print {
@@ -161,15 +158,19 @@ sup {
 <body>
 <h3>Levey Zhu (朱建刚)</h3>
 
-<p>A 25 years old iOS developer in Hangzhou China.</p>
+<p>A 26 years old software engineer.</p>
 
 <hr />
 
 <h3>Experience</h3>
 
+<h5>Application Architect</h5>
+
+<p>Bindo Labs  (2014 ~ Present)</p>
+
 <h6>iOS Developer</h6>
 
-<p><em>Wireless Team of Taobao China  (2012 ~ Present)</em></p>
+<p><em>Wireless Team of Taobao/Alipay (2012 ~ 2014)</em></p>
 
 <h6>iOS Developer</h6>
 
@@ -181,9 +182,39 @@ sup {
 
 <p>My GitHub id is <a href="https://github.com/levey"><strong>levey</strong></a>, you can find some things I've done.</p>
 
-<p>Here are some projects I've done, you can click the title if the app is available on App Store .</p>
+<p>Here are some projects I've done, you can click the title if the app is still available on App Store .</p>
 
 <p><em>If it's has * prefix, it means I made it in parttime.</em></p>
+
+<p><strong> Bindo Devices </strong></p>
+
+<pre><code>It's a map app, record all online devices of Bindo devices, and show them on Google Apps. Backend written by Hapi.js, redis as database, frontend is React.js, adopt gulp.js as buils system.
+</code></pre>
+
+<p><strong> Bindo POS Display </strong></p>
+
+<pre><code>This is customer facing display, pairing with a Bindo POS, displaying receipt for and store infomation for customer with nice UI, it pairs POS by Multipeer Connectivity framework, purely written with Swift.
+</code></pre>
+
+<p><a href="https://itunes.apple.com/us/app/bindo-pos-point-sale-register/id550740615?mt=8"><strong> Bindo POS </strong> </a></p>
+
+<pre><code>Bindo POS is powerful iPad point-of-sales, it's a large and complicated system. I work on every client(iPad, iPhone) part of this system, works including:
+* Profile/improve performance of checkout, fix memory leak and crash in the core part of checkout workflow.
+* Improve synchronization, smart switching between realtime push and polling.
+* Refactor base netowrking, adopt AFNetworking and customize.
+* Setup event/log system for user behavior analysing.
+* Setup base model funtions, Serialization / Deserialization / Observing.
+* Seprate common helpers/ui elements as frameworks that will used by other projects.
+* Set up unit tests and integration tests, setup continuous integration environment with Xcode Bots.
+* Offline Checkout with LevelDB.
+* Customer Display, connect with Multipeer Connectivity.
+* Localization.
+</code></pre>
+
+<p><a href="https://itunes.apple.com/us/app/zhi-fu-bao-qian-bao-zhifubao/id333206289?mt=8"><strong> Alipay </strong> </a></p>
+
+<pre><code>Work on common framework for several projects, mobile express pay popup module for internal/external apps.
+</code></pre>
 
 <p><a href="https://itunes.apple.com/cn/app/tao-bao/id387682726?mt=8"><strong> Taobao</strong> </a></p>
 
@@ -205,7 +236,7 @@ sup {
 <pre><code>An instant messager demo built with Socket.IO, It has web front end and iPhone client. Try it at slyfairy.com:9000, and the username must be levey or karin :)
 </code></pre>
 
-<p><a href="https://itunes.apple.com/cn/app/chong-wu-yi-sheng/id646756698?mt=8"><strong>* Pet Doctor</strong></a></p>
+<p><a href="https://itunes.apple.com/us/app/chong-wu-yi-sheng/id716301555?mt=8"><strong>* Pet Doctor</strong></a></p>
 
 <pre><code>An app for users know what diease does their pets get through chosing symptoms. The other useful feature is looking for pet hospitals around current location.
 </code></pre>
@@ -236,12 +267,12 @@ An iOS 、OS X development forum, hosting on Heroku, little and clean, build wit
 <pre><code>English version of "XiangGe", just changed the sharing methods, it support sharing to Facebook, Twitter, Tumblr.
 </code></pre>
 
-<p><a href="http://itunes.apple.com/us/app/id436715684?mt=8"><strong>PhoneWork</strong></a></p>
+<p><strong>PhoneWork</strong></p>
 
 <pre><code>Tiny app, match the iPhone model automatically, change the background image,and user can download more background images, at last, make the order of the back's image, send it to server, and the user will received a back case with chosen image.
 </code></pre>
 
-<p><a href="http://itunes.apple.com/us/app/id421320385?mt=8"><strong>PINKE</strong></a></p>
+<p><strong>PINKE</strong></p>
 
 <pre><code>A project for Zhejiang Online，a client like koubei.com, lifestyle category app.
 </code></pre>
@@ -290,12 +321,14 @@ An iOS 、OS X development forum, hosting on Heroku, little and clean, build wit
 
 <hr />
 
-<h3>Contacts</h3>
+<h3>Contact Me</h3>
 
-<p>If you want to contact me, please call me or send an email.</p>
+<p>If you are interested about me, you can contact me in the ways shown below.</p>
 
-<p><strong>Phone</strong>: +86 18667121397</p>
+<p><strong>M(CN)</strong>. +86 18667121397</p>
 
-<p><strong>Mail</strong>: <a href="&#x6d;&#x61;&#x69;&#108;&#x74;&#111;&#x3a;&#108;&#x65;&#118;&#x65;&#121;&#x2e;&#122;&#x68;&#x75;&#64;&#x67;&#x6d;&#x61;&#105;&#x6c;&#x2e;&#99;&#111;&#x6d;">&#x6c;&#101;&#118;&#x65;&#121;&#x2e;&#x7a;&#x68;&#117;&#64;&#103;&#x6d;&#97;&#x69;&#x6c;&#46;&#99;&#111;&#109;</a></p>
+<p><strong>M(US)</strong>. +1 (917)302-2403</p>
+
+<p><strong>Email</strong>. <a href="&#109;&#x61;&#x69;&#108;&#116;&#111;&#58;&#108;&#101;&#118;&#101;&#x79;&#46;&#x7a;&#104;&#117;&#64;&#103;&#109;&#x61;&#105;&#108;&#46;&#99;&#x6f;&#x6d;">&#x6c;&#x65;&#118;&#x65;&#121;&#x2e;&#122;&#x68;&#x75;&#x40;&#103;&#109;&#x61;&#105;&#108;&#x2e;&#x63;&#111;&#109;</a></p>
 </body>
 </html>
